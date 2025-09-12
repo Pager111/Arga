@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terima Kasih!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#070b16; --bg2:#0c1224;
+      --accent:#00e5ff; --accent2:#7c4dff; --ok:#2dd4bf;
+      --txt:#e6eeff;
+      --glow: 0 0 12px rgba(0,229,255,.6), 0 0 30px rgba(124,77,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--txt);
+      background: radial-gradient(1200px 800px at 70% 20%, #101a3a 0%, transparent 55%),
+                  radial-gradient(900px 700px at 20% 80%, #0a1533 0%, transparent 60%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      overflow:hidden;
+    }
+
+    /* Starfield canvas */
+    canvas#stars{position:fixed;inset:0;z-index:0}
+
+    /* Neon grid floor */
+    .grid{
+      position:fixed;left:0;right:0;bottom:-8vh;height:60vh;z-index:1;
+      background:
+        linear-gradient(transparent 0%, rgba(0,229,255,.1) 1%) 0 0/100% 14px,
+        linear-gradient(90deg, transparent 0%, rgba(124,77,255,.14) 1%) 0 0/14px 100%;
+      transform: perspective(600px) rotateX(60deg);
+      box-shadow: inset 0 40px 80px rgba(0,0,0,.6);
+      mask-image: linear-gradient(to top, transparent, black 40%);
+    }
+
+    /* Card */
+    .wrap{
+      position:relative; z-index:2; height:100%;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .card{
+      width:min(820px,92vw);
+      border-radius:20px; padding:28px 24px 26px;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(8px);
+      border:1px solid rgba(124,77,255,.35);
+      box-shadow: var(--glow);
+      animation: pop .6s ease both;
+      text-align:center;
+    }
+    @keyframes pop{ from{ transform:translateY(10px) scale(.98); opacity:0 } to{ transform:none; opacity:1 } }
+
+    .check{
+      width:86px;height:86px;margin:0 auto 14px;border-radius:50%;
+      border:2px solid var(--ok); display:grid; place-items:center;
+      box-shadow: 0 0 24px rgba(45,212,191,.45);
+    }
+    .check svg{ width:52px; height:52px; fill:none; stroke:var(--ok); stroke-width:6; stroke-linecap:round; stroke-linejoin:round; }
+    .check svg path{ stroke-dasharray: 150; stroke-dashoffset:150; animation: dash 1s .15s ease forwards; }
+    @keyframes dash{ to{ stroke-dashoffset:0 } }
+
+    h1{
+      font-family:'Orbitron', sans-serif;
+      font-weight:900; letter-spacing:.5px; margin:6px 0 8px; font-size: clamp(26px, 3.3vw, 38px);
+      text-shadow: 0 0 10px rgba(0,229,255,.35);
+    }
+    p.lead{ margin:0 0 14px; opacity:.95; font-size: clamp(14px, 2vw, 16px); }
+
+    .info{
+      margin: 10px auto 18px; padding:10px 12px; width: fit-content;
+      background: rgba(0,229,255,.08); border:1px solid rgba(0,229,255,.35);
+      border-radius:12px; font-size:14px;
+    }
+
+    .btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn{
+      border:none; cursor:pointer; text-decoration:none;
+      padding: 12px 18px; border-radius:999px; font-weight:800;
+      letter-spacing:.3px; font-size:15px; transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      color:#07121f; background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 8px 24px rgba(0,229,255,.25);
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow:0 12px 28px rgba(124,77,255,.3); }
+    .btn-outline{
+      background:transparent; color:var(--txt);
+      border:1.5px solid rgba(124,77,255,.6);
+      box-shadow:none;
+    }
+    .btn-outline:hover{ background:rgba(124,77,255,.1); }
+
+    .brand{
+      position:fixed; top:16px; left:16px; z-index:2;
+      display:inline-flex; align-items:center; gap:10px; padding:6px 10px;
+      background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:10px;
+      text-decoration:none; color:var(--txt);
+    }
+    .brand img{ height:42px; }
+    .brand span{ font-family:'Orbitron',sans-serif; font-weight:700; letter-spacing:.3px; }
+
+    footer{
+      position:fixed; bottom:10px; left:0; right:0; z-index:2;
+      text-align:center; font-size:12px; opacity:.7;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="grid"></div>
+
+  <a class="brand" href="index.html" aria-label="Kembali ke Home">
+    <img src="img/Logo3.png" alt="Logo">
+    <span>ARGA YASA KIRNA</span>
+  </a>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="check" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><path d="M16 33 L28 45 L50 22"/></svg>
+      </div>
+      <h1>Terima kasih! Pendaftaran terkirim</h1>
+      <p class="lead">Tim kami akan meninjau data Anda dan menghubungi melalui email/WhatsApp yang tertera.</p>
+      <div class="info">Kode referensi otomatis tersimpan di Formspree dashboard Anda.</div>
+      <div class="btns">
+        <a class="btn" href="index.html">Kembali ke Beranda</a>
+        <a class="btn btn-outline" href="pendaftaran.html">Kirim Pendaftaran Lagi</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>© <span id="y"></span> ARGA YASA KIRNA</footer>
+
+  <script>
+    // Tahun footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Starfield sederhana
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let w, h, stars = [];
+    function resize(){
+      w = canvas.width  = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      makeStars();
+    }
+    function makeStars(){
+      const count = Math.min(220, Math.floor(w*h/9000));
+      stars = Array.from({length: count}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        z: Math.random()*1.5 + .2,
+        a: Math.random()*.8 + .2
+      }));
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      for(const s of stars){
+        s.y += s.z; if(s.y>h) s.y = 0, s.x = Math.random()*w;
+        ctx.globalAlpha = s.a;
+        ctx.fillStyle = Math.random()<.5 ? '#00e5ff' : '#7c4dff';
+        ctx.fillRect(s.x, s.y, 2, 2);
+      }
+      requestAnimationFrame(tick);
+    }
+    window.addEventListener('resize', resize);
+    resize(); tick();
+  </script>
+</body>
+</html>
