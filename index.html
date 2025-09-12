@@ -47,6 +47,29 @@ http://www.templatemo.com/tm-497-upper
     color: white;
     font-size: 30px;
   }
+	.btn-daftar-fixed{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    display: none; /* default disembunyikan, nanti ditampilkan di page 1 */
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #0d6efd; /* biru bootstrap */
+    color: #fff !important;
+    font-weight: 600;
+    letter-spacing: .3px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+  }
+  .btn-daftar-fixed:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0,0,0,.28);
+    text-decoration: none;
+  }
+  @media (max-width: 576px){
+    .btn-daftar-fixed{ right: 12px; bottom: 12px; padding: 10px 14px; }
+  }
 </style>
 
 </head>
@@ -78,13 +101,7 @@ http://www.templatemo.com/tm-497-upper
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#0" data-no="3">Tactical</a>
-                              <!-- </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#0" data-no="4">Pendaftaran</a>  -->
-									<li class="nav-item">
-  									<a class="nav-link" href="pendaftaran.html">Pendaftaran</a>
-									</li>
-                                 </li>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#0" data-no="5">About Us</a>
                                 </li>
@@ -476,7 +493,10 @@ http://www.templatemo.com/tm-497-upper
                     $('.cd-hero-slider').removeClass('small-screen');
                     $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", "100%");
                 }
-            }
+            // ... akhir fungsi adjustHeightOfPage
+toggleDaftarButtonByPageNo(pageNo);
+
+			}
 
             /*
                 Everything is loaded including images.
@@ -512,10 +532,10 @@ http://www.templatemo.com/tm-497-upper
                 /* Collapse menu after click 
                 -----------------------------------------*/
                 $('#tmNavbar a').click(function(){
-                    $('#tmNavbar').collapse('hide');
+  $('#tmNavbar').collapse('hide');
+  adjustHeightOfPage($(this).data("no"));
+});
 
-                    adjustHeightOfPage($(this).data("no")); // Adjust page height       
-                });
 
                 /* Browser resized 
                 -----------------------------------------*/
@@ -624,6 +644,21 @@ http://www.templatemo.com/tm-497-upper
     });
   })();
 </script>
+		<script>
+  // TAMPIL/HILANGKAN tombol sesuai halaman slider aktif
+  function toggleDaftarButtonByPageNo(pageNo){
+    if (Number(pageNo) === 1) {
+      $('.btn-daftar-fixed').fadeIn(120);
+    } else {
+      $('.btn-daftar-fixed').fadeOut(120);
+    }
+  }
+</script>
+
+
+		<a href="pendaftaran.html" class="btn-daftar-fixed" aria-label="Daftar Sekarang">
+  Daftar Sekarang
+</a>
 
 </body>
 
