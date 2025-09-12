@@ -6,13 +6,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Pendaftaran Lomba</title>
 
-  <!-- (opsional) biar tipografi & komponen rapi -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/templatemo-style.css?v=20250912-1" />
 
   <style>
-    /* BG & layout dasar halaman */
     body{
       min-height:100vh;
       background: url('img/BCG1.png') center/cover no-repeat fixed, #010101;
@@ -25,6 +22,7 @@
       display:inline-flex; align-items:center; gap:10px;
       padding:6px 10px; background: rgba(255,255,255,.65); border-radius:8px;
       backdrop-filter: blur(4px);
+      text-decoration:none;
     }
     .logo-fixed img{ height:46px; display:block; }
     .logo-fixed span{ font-weight:800; font-size:14px; color:#000; letter-spacing:.2px; }
@@ -33,13 +31,13 @@
     .page-wrap{
       min-height:100vh;
       display:flex; align-items:center; justify-content:center;
-      padding: 90px 16px 40px; /* tambah top padding supaya tidak ketutup logo */
+      padding: 90px 16px 40px; /* beri ruang agar tidak ketutup logo */
     }
 
     /* Kartu/form */
     .form-card{
       width:100%; max-width:760px;
-      background: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.9);
       border-radius:14px;
       box-shadow: 0 20px 60px rgba(0,0,0,.35);
       padding: 28px 24px;
@@ -47,9 +45,7 @@
     .form-card h1{
       font-size:28px; font-weight:900; margin:0 0 14px; color:#000;
     }
-    .form-help{
-      margin-top:8px; font-size:14px; color:#333;
-    }
+    .form-help{ margin-top:8px; font-size:14px; color:#333; }
 
     /* Input & tombol */
     .form-group{ margin-bottom:14px; }
@@ -57,6 +53,7 @@
       background: rgba(255,255,255,.92);
       border-radius:10px; border:1px solid rgba(0,0,0,.12);
       padding: 12px 14px; font-size:16px;
+      transition: border-color .15s ease, box-shadow .15s ease;
     }
     .form-control:focus{
       border-color:#0d6efd; box-shadow: 0 0 0 0.15rem rgba(13,110,253,.25);
@@ -65,16 +62,21 @@
     .tm-submit-btn{
       background:#0d6efd; color:#fff; border:none;
       padding: 12px 26px; border-radius:999px; font-size:16px; font-weight:700;
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
     }
     .tm-submit-btn:hover{ transform: translateY(-1px); box-shadow:0 8px 22px rgba(13,110,253,.35); }
-    .tm-submit-btn:active{ transform: translateY(0); }
+    .tm-submit-btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
 
     /* Status pesan */
     #status-daftar{ margin-top:10px; font-size:14px; font-weight:700; }
     .ok{ color:#1e7e34; } .err{ color:#b02a37; }
 
-    /* Checklist (checkbox) rapi */
+    /* Email hint/suggestion */
+    .hint{ font-size:12px; margin-top:6px; }
+    .hint.ok{ color:#198754; }
+    .hint.warn{ color:#cc8b00; }
+    .hint.err{ color:#b02a37; }
+
     .check-list label{ display:block; margin-bottom:6px; font-weight:700; }
     .check-list input[type="checkbox"]{ margin-right:8px; }
 
@@ -98,9 +100,7 @@
     <section class="form-card">
       <h1>Form Pendaftaran Lomba</h1>
 
-      <form id="form-daftar" class="tm-contact-form"
-            action="https://formspree.io/f/xblabdpv" method="POST" accept-charset="utf-8">
-
+      <form id="form-daftar" class="tm-contact-form" action="https://formspree.io/f/xblabdpv" method="POST" novalidate>
         <!-- Nama Tim -->
         <div class="form-group">
           <label for="nama_tim">Nama Tim</label>
@@ -134,35 +134,134 @@
           <input type="text" id="telepon" name="telepon" class="form-control" required />
         </div>
 
-        <!-- Email -->
+        <!-- Email + mail checker -->
         <div class="form-group">
           <label for="email">Email Aktif</label>
           <input type="email" id="email" name="email" class="form-control" required />
+          <div id="email-hint" class="hint" aria-live="polite"></div>
         </div>
 
         <!-- Anti-bot & meta -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <input type="hidden" name="_subject" value="Pendaftaran Baru dari Website" />
-        <!-- Jika mau redirect ke halaman terima kasih, buka baris berikut -->
-        <!-- <input type="hidden" name="_redirect" value="https://argayasakirna.com/terima-kasih.html" /> -->
+        <input type="hidden" name="_redirect" value="https://argayasakirna.com/terima-kasih.html" />
 
-        <button type="submit" class="tm-submit-btn">Daftar Sekarang</button>
+        <button id="submit-btn" type="submit" class="tm-submit-btn">Daftar Sekarang</button>
         <p id="status-daftar" role="status" aria-live="polite"></p>
-        <p class="form-help">Pastikan data yang Anda masukkan sudah benar sebelum mengirim.</p>
+        <p class="form-help">Pastikan data sudah benar sebelum mengirim.</p>
       </form>
     </section>
   </main>
 
-  <!-- JS submit tanpa reload (native fetch) -->
+  <!-- JS: mail checker + submit -->
   <script>
+    // ===== Mail Checker (format + saran domain) =====
+    (function(){
+      const emailInput = document.getElementById('email');
+      const hint = document.getElementById('email-hint');
+      const submitBtn = document.getElementById('submit-btn');
+
+      const commonDomains = [
+        "gmail.com","yahoo.com","yahoo.co.id","outlook.com","hotmail.com",
+        "live.com","icloud.com","proton.me","protonmail.com","aol.com","ymail.com"
+      ];
+
+      function levenshtein(a,b){
+        if(a.length===0) return b.length;
+        if(b.length===0) return a.length;
+        const m = [];
+        for(let i=0;i<=b.length;i++){ m[i]=[i]; }
+        for(let j=0;j<=a.length;j++){ m[0][j]=j; }
+        for(let i=1;i<=b.length;i++){
+          for(let j=1;j<=a.length;j++){
+            m[i][j] = Math.min(
+              m[i-1][j]+1,
+              m[i][j-1]+1,
+              m[i-1][j-1] + (a[j-1]===b[i-1]?0:1)
+            );
+          }
+        }
+        return m[b.length][a.length];
+      }
+
+      function validateEmailFormat(v){
+        // syarat minimal: ada @ dan dot setelah @, TLD 2-10 huruf
+        const basic = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,10}$/;
+        if(!basic.test(v)) return { ok:false, msg:"Format email tidak valid." };
+
+        // cek domain dasar
+        const domain = v.split('@')[1];
+        if(!domain || domain.indexOf('.')===-1 || domain.includes('..')){
+          return { ok:false, msg:"Domain email tidak valid." };
+        }
+        return { ok:true };
+      }
+
+      function suggestDomain(domain){
+        let best = null, bestDist = 99;
+        for(const d of commonDomains){
+          const dist = levenshtein(domain, d);
+          if(dist < bestDist){ bestDist = dist; best = d; }
+        }
+        return (bestDist<=2) ? best : null; // saran jika beda <= 2
+      }
+
+      function updateState(){
+        const v = emailInput.value.trim();
+        if(!v){
+          hint.textContent = ""; hint.className = "hint";
+          emailInput.setAttribute('aria-invalid','false');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        const res = validateEmailFormat(v);
+        if(!res.ok){
+          hint.textContent = res.msg;
+          hint.className = "hint err";
+          emailInput.setAttribute('aria-invalid','true');
+          submitBtn.disabled = true;
+          return;
+        }
+
+        // cek saran domain
+        const domain = v.split('@')[1].toLowerCase();
+        const sug = suggestDomain(domain);
+        if(sug && sug !== domain){
+          hint.innerHTML = `Maksudnya <strong>${v.split('@')[0]}@${sug}</strong>?`;
+          hint.className = "hint warn";
+          emailInput.setAttribute('aria-invalid','false');
+          submitBtn.disabled = false;
+        }else{
+          hint.textContent = "Alamat email terlihat valid.";
+          hint.className = "hint ok";
+          emailInput.setAttribute('aria-invalid','false');
+          submitBtn.disabled = false;
+        }
+      }
+
+      emailInput.addEventListener('input', updateState);
+      emailInput.addEventListener('blur', updateState);
+    })();
+
+    // ===== Submit ke Formspree + redirect =====
     (function(){
       const form = document.getElementById('form-daftar');
       const statusEl = document.getElementById('status-daftar');
+      const submitBtn = document.getElementById('submit-btn');
 
       form.addEventListener('submit', async function(e){
         e.preventDefault();
+        // jika email invalid (diblok oleh checker)
+        if(form.querySelector('#email[aria-invalid="true"]')){
+          statusEl.textContent = 'Periksa kembali alamat email Anda.';
+          statusEl.className = 'err';
+          return;
+        }
+
         statusEl.textContent = 'Mengirim...';
         statusEl.className = '';
+        submitBtn.disabled = true;
 
         try{
           const res = await fetch(form.action, {
@@ -172,9 +271,9 @@
           });
 
           if(res.ok){
-            statusEl.textContent = 'Terkirim! Kami akan menghubungi Anda via email.';
-            statusEl.className = 'ok';
-            form.reset();
+            const redirectTo = form.querySelector('input[name="_redirect"]')?.value || '/terima-kasih.html';
+            window.location.href = redirectTo; // redirect otomatis
+            return;
           }else{
             const data = await res.json().catch(()=>null);
             const msg = data && data.errors
@@ -186,6 +285,8 @@
         }catch(err){
           statusEl.textContent = 'Gagal konek: ' + err;
           statusEl.className = 'err';
+        }finally{
+          submitBtn.disabled = false;
         }
       });
     })();
