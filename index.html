@@ -156,7 +156,7 @@ http://www.templatemo.com/tm-497-upper
 <li>                    
   <div class="cd-full-width first-gallery">
     <!-- Video Background -->
-    <video autoplay muted loop class="gallery-video">
+    <video autoplay muted loop playsinline class="gallery-video">
       <source src="video/Vid1.mp4" type="video/mp4">
       Browser kamu tidak mendukung video.
     </video>
@@ -174,7 +174,7 @@ http://www.templatemo.com/tm-497-upper
           <div><img src="img/drone-03.jpg" alt="Drone 3"></div>
           <div><img src="img/drone-04.jpg" alt="Drone 4"></div>
           <div><img src="img/drone-05.jpg" alt="Drone 5"></div>
-		  <div><img src="img/drone-06.jpg" alt="Drone 6"></div>	
+		  <div><img src="img/drone-06.jpg" alt="Drone 5"></div>	
         </div>
       </div>
     </div>
@@ -262,82 +262,7 @@ http://www.templatemo.com/tm-497-upper
                     </div>
                 </li>
 
-               <!-- Page 4 Form Pendaftaran -->
-<li>
-    <div class="cd-full-width">
-        <div class="container-fluid js-tm-page-content" data-page-no="4" data-page-type="gallery">                        
-            <div class="tm-img-gallery-container tm-img-gallery-container-3">
-
-               <!-- FORM PENDAFTARAN -->
-<div class="tm-bg-white-translucent tm-textbox tm-textbox-padding">
-  <h2 class="tm-text-title">Form Pendaftaran Lomba</h2>
-
-  <!-- GANTI: action ke endpoint Formspree, tambah id dan elemen status -->
-  <form action="https://formspree.io/f/xblabdpv" method="POST" class="tm-contact-form" id="form-daftar" accept-charset="utf-8">
-    
-    <!-- Nama Tim -->
-    <div class="form-group">
-      <label for="nama_tim">Nama Tim:</label>
-      <input type="text" id="nama_tim" name="nama_tim" class="form-control" required>
-    </div>
-
-    <!-- Nama Anggota Tim -->
-    <div class="form-group">
-      <label for="anggota_tim">Nama Anggota Tim:</label>
-      <textarea id="anggota_tim" name="anggota_tim" class="form-control" rows="3" placeholder="Pisahkan dengan koma jika lebih dari satu" required></textarea>
-    </div>
-
-    <!-- Checkbox Bidang Lomba -->
-    <div class="form-group">
-      <label>Bidang Lomba yang Diikuti:</label><br>
-      <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Dropping Cargo"> Inovasi Desain Drone Dropping Cargo</label><br>
-      <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Tepat Sasaran"> Inovasi Desain Drone Tepat Sasaran</label><br>
-      <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Teknologi Terbaru"> Inovasi Desain Drone Teknologi Terbaru</label>
-    </div>
-
-    <!-- Asal Instansi -->
-    <div class="form-group">
-      <label for="instansi">Asal Instansi:</label>
-      <input type="text" id="instansi" name="instansi" class="form-control" required>
-    </div>
-
-    <!-- Nomor Telepon -->
-    <div class="form-group">
-      <label for="telepon">Nomor Telepon (WhatsApp):</label>
-      <input type="text" id="telepon" name="telepon" class="form-control" required>
-    </div>
-
-    <!-- Email -->
-    <div class="form-group">
-      <label for="email">Email Aktif:</label>
-      <input type="email" id="email" name="email" class="form-control" required>
-    </div>
-
-    <!-- Anti-bot honeypot (disembunyikan) -->
-    <input type="text" name="_gotcha" style="display:none">
-
-    <!-- Subjek email (opsional) -->
-    <input type="hidden" name="_subject" value="Pendaftaran Baru dari Website">
-
-    <!-- Redirect setelah sukses (opsional) -->
-    <!-- <input type="hidden" name="_redirect" value="https://namadomain.com/terima-kasih.html"> -->
-
-    <button type="submit" class="pull-xs-right tm-submit-btn">Daftar Sekarang</button>
-
-    <!-- Tempat status -->
-    <p id="status-daftar" style="margin-top:10px;"></p>
-  </form>
-</div>
-<!-- END FORM PENDAFTARAN -->
-
-
-            </div>                                                    
-        </div>                                                
-    </div>
-</li>
-
-
-                <!-- Page 5 About -->
+                              <!-- Page 5 About -->
                 <li>
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content tm-page-width" data-page-no="5">
@@ -657,15 +582,10 @@ toggleDaftarButtonByPageNo(pageNo);
 
 
 		<a href="pendaftaran.html" class="btn-daftar-fixed" aria-label="Daftar Sekarang">
-  Daftar Sekarang
+  Daftar Kompetisi Drone Sekarang
 </a>
 
 </body>
 
 </html>
-
-
-
-
-
 
