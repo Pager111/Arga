@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Pendaftaran Lomba | ARGA YASA KIRNA</title>
+
+  <!-- Styles yang sama dengan index.html -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+  <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/templatemo-style.css">
+
+  <style>
+    body {
+      background: url('img/tm-bg-slide-1.jpg') center/cover no-repeat fixed; /* optional biar seragam */
+    }
+    .tm-page-pad { padding: 40px 15px; }
+    .tm-title { margin-bottom: 20px; }
+    .tm-max-700 { max-width: 700px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR sederhana -->
+  <nav class="navbar">
+    <div class="tm-navbar-bg" style="width:100%;">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/Logo3.png" alt="Logo" style="height:60px;">
+      </a>
+
+      <div class="text-xs-center text-uppercase tm-navbar" id="tmNavbar" style="padding:10px 0;">
+        <ul class="nav navbar-nav" style="display:inline-block;">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Drones</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Tactical</a></li>
+          <li class="nav-item active selected"><a class="nav-link" href="pendaftaran.html">Pendaftaran</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Contact Info</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- KONTEN -->
+  <div class="container tm-page-pad">
+    <div class="tm-bg-white-translucent tm-textbox tm-textbox-padding tm-max-700">
+      <h2 class="tm-text-title tm-title">Form Pendaftaran Lomba</h2>
+
+      <form action="https://formspree.io/f/yourEndpoint" method="POST" class="tm-contact-form" id="form-daftar" accept-charset="utf-8">
+        <!-- Nama Tim -->
+        <div class="form-group">
+          <label for="nama_tim">Nama Tim:</label>
+          <input type="text" id="nama_tim" name="nama_tim" class="form-control" required>
+        </div>
+
+        <!-- Nama Anggota Tim -->
+        <div class="form-group">
+          <label for="anggota_tim">Nama Anggota Tim:</label>
+          <textarea id="anggota_tim" name="anggota_tim" class="form-control" rows="3" placeholder="Pisahkan dengan koma jika lebih dari satu" required></textarea>
+        </div>
+
+        <!-- Checkbox Bidang -->
+        <div class="form-group">
+          <label>Bidang Lomba yang Diikuti:</label><br>
+          <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Dropping Cargo"> Inovasi Desain Drone Dropping Cargo</label><br>
+          <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Tepat Sasaran"> Inovasi Desain Drone Tepat Sasaran</label><br>
+          <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Teknologi Terbaru"> Inovasi Desain Drone Teknologi Terbaru</label>
+        </div>
+
+        <!-- Instansi -->
+        <div class="form-group">
+          <label for="instansi">Asal Instansi:</label>
+          <input type="text" id="instansi" name="instansi" class="form-control" required>
+        </div>
+
+        <!-- Telepon -->
+        <div class="form-group">
+          <label for="telepon">Nomor Telepon (WhatsApp):</label>
+          <input type="text" id="telepon" name="telepon" class="form-control" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Aktif:</label>
+          <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+
+        <!-- Anti-bot & meta -->
+        <input type="text" name="_gotcha" style="display:none">
+        <input type="hidden" name="_subject" value="Pendaftaran Baru dari Website">
+        <!-- Kalau mau redirect ke halaman terima kasih, buka baris di bawah dan buat file terima-kasih.html -->
+        <!-- <input type="hidden" name="_redirect" value="https://argayasakirna.com/terima-kasih.html"> -->
+
+        <button type="submit" class="pull-xs-right tm-submit-btn">Daftar Sekarang</button>
+        <p id="status-daftar" style="margin-top:10px;"></p>
+      </form>
+    </div>
+  </div>
+
+  <footer class="tm-footer">
+    <div class="tm-social-icons-container text-xs-center">
+      <a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+      <a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+      <a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+      <a href="#" class="tm-social-link"><i class="fa fa-behance"></i></a>
+      <a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+    </div>
+    <p class="tm-copyright-text">Copyright &copy; 2021 ARGA YASA KIRNA</p>
+  </footer>
+
+  <!-- Script yang sama dengan index agar style/komponen konsisten -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Submit tanpa reload (AJAX) -->
+  <script>
+  (function(){
+    const form = document.getElementById('form-daftar');
+    const statusEl = document.getElementById('status-daftar');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      statusEl.textContent = 'Mengirim...';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          statusEl.textContent = 'Terkirim! Kami akan menghubungi Anda via email.';
+          form.reset();
+        } else {
+          const data = await res.json().catch(()=>null);
+          statusEl.textContent = (data && data.errors)
+            ? data.errors.map(e=>e.message).join(', ')
+            : 'Gagal mengirim.';
+        }
+      } catch (err) {
+        statusEl.textContent = 'Gagal konek: ' + err;
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
