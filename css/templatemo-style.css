@@ -71,8 +71,8 @@ button:focus{outline:none;}
 /* Sesuaikan jumlah slide (1..5) */
 .cd-hero-slider li:nth-of-type(1){background-image:url("../img/BCG1.png");}
 .cd-hero-slider li:nth-of-type(2){background-image:url("../img/tm-bg-2.jpeg");}
-.cd-hero-slider li:nth-of-type(3){background-image:url("../img/tm-bg-3.jpeg");}
-.cd-hero-slider li:nth-of-type(4){background-image:url("../img/tm-bg-4.jpeg");}
+.cd-hero-slider li:nth-of-type(3){background-image:url("../img/tm-img-03.jpg");}
+.cd-hero-slider li:nth-of-type(4){background-image:url("../img/BCG1.png");}
 .cd-hero-slider li:nth-of-type(5){background-image:url("../img/tm-bg-5.jpeg");}
 
 .cd-hero-slider .cd-full-width{text-align:left;padding-top:0;}
@@ -105,13 +105,13 @@ button:focus{outline:none;}
 
 /* ========= Layout blocks ========= */
 .tm-textbox{display:inline-block;width:100%;}
-.tm-textbox-padding{padding:35px 30px;}
+.tm-textbox-padding{padding:40px 35px;}
 .tm-bg-white-translucent{background-color:rgba(255,255,255,.8);}
 .tm-bg-white-translucent p{color:black;}
 
 .tm-3-col-container{overflow:auto;}
 .tm-3-col-textbox{max-width:100%;padding:0 10px;margin-bottom:30px;width:100%;}
-.tm-3-col-textbox-inner{ text-align:center; height:300px; overflow:auto; }
+.tm-3-col-textbox-inner{ text-align:center; height:auto; min-height:300px; overflow:visible; }
 
 .tm-2-col-textbox-2{
   width:100%;padding:25px;margin-bottom:30px;flex:0 1 auto;
@@ -350,4 +350,159 @@ a:focus-visible, .tm-submit-btn:focus-visible, .btn-daftar-fixed:focus-visible{
 .cd-hero-slider > li { display: none; }
 .cd-hero-slider > li.selected { display: block; }
 
+/* NAVBAR: transparan 90% tanpa blur */
+.tm-navbar-bg{
+  background: rgba(0,0,0,0.10) !important;  /* 10% hitam = 90% transparan */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Warna teks menu tetap putih */
+.cd-slider-nav a,
+.navbar-nav .nav-link{ color:#fff !important; }
+
+/* State aktif/hover: highlight tipis, teks tetap putih */
+.cd-slider-nav .nav-item.selected .nav-link,
+.cd-slider-nav .nav-link:hover,
+.cd-slider-nav .nav-link:focus{
+  background: rgba(255,255,255,0.15) !important;
+  color:#fff !important;
+}
+
+/* Dorong konten turun supaya tidak di belakang navbar */
+.cd-full-width .container-fluid{
+  margin-top: 0 !important;     /* override bawaan tema */
+  padding-top: 110px;           /* sesuaikan tinggi navbar (80–120px) */
+}
+@media (max-width:480px){
+  .cd-full-width .container-fluid{ padding-top: 80px; }
+}
+
+/* Menu kolaps (mobile) biar tetap terbaca */
+#tmNavbar{ background: rgba(0,0,0,0.60) !important; }
+
+/* ==== FIX NABRAK NAVBAR ==== */
+:root{ --nav-h: 110px; }             /* tinggi navbar di desktop */
+@media (max-width: 480px){
+  :root{ --nav-h: 80px; }            /* tinggi navbar di mobile */
+}
+
+/* navbar tetap di atas, transparan tanpa blur */
+.cd-slider-nav{
+  position: fixed;                   /* dari absolute -> fixed */
+  top: 0; left: 0; right: 0;
+  z-index: 1002;
+}
+.tm-navbar-bg{
+  background: rgba(0,0,0,0.10) !important;  /* 90% transparan */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* dorong seluruh slider turun setinggi navbar */
+.cd-hero-slider{ padding-top: var(--nav-h); }
+
+/* hapus offset/margin minus bawaan tema */
+.cd-full-width .container-fluid{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* konten “About Us” & lainnya tetap di bawah navbar */
+.js-tm-page-content,
+.tm-img-gallery-container{
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* teks menu selalu putih (tidak ikut jadi hitam) */
+.cd-slider-nav a,
+.navbar-nav .nav-link{ color:#fff !important; text-shadow:0 2px 6px rgba(0,0,0,.35); }
+
+/* state aktif/hover: highlight tipis, teks tetap putih */
+.cd-slider-nav .nav-item.selected .nav-link,
+.cd-slider-nav .nav-link:hover,
+.cd-slider-nav .nav-link:focus{
+  background: rgba(255,255,255,0.15) !important;
+  color:#fff !important;
+}
+
+
+/*untuk style navbar
+/* ==== Floating translucent navbar (tanpa blur) ==== */
+.cd-slider-nav{
+  position: fixed; top:0; left:0; right:0; z-index:1002; background: transparent;
+}
+.tm-navbar-bg{
+  max-width: 1180px;
+  margin: 10px auto;
+  padding: 10px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(0,0,0,.24), rgba(0,0,0,.18));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+/* Brand size */
+.cd-slider-nav a.navbar-brand img{ height:60px; }
+@media (max-width:768px){ .cd-slider-nav a.navbar-brand img{ height:46px; } }
+
+/* Nav links = pill buttons */
+.navbar-nav{ gap:8px; }
+.navbar-nav .nav-link{
+  color:#fff !important;
+  padding:10px 18px;
+  height:auto; width:auto;
+  border-radius:9999px;
+  letter-spacing:.3px;
+  font-weight:700;
+  position:relative;
+  transition: background .25s ease, transform .15s ease;
+}
+.navbar-nav .nav-link:hover{
+  background: rgba(255,255,255,.12);
+  transform: translateY(-1px);
+}
+
+/* Active pill */
+.cd-slider-nav .nav-item.selected .nav-link{
+  background: linear-gradient(135deg,#e41e26 0%, #e8643a 100%);
+  box-shadow: 0 6px 16px rgba(228,30,38,.35);
+  color:#fff !important;
+}
+
+/* Hover underline (desktop) */
+@media (min-width:992px){
+  .navbar-nav .nav-link::after{
+    content:''; position:absolute; left:18px; right:18px; bottom:6px; height:2px;
+    background:#fff; border-radius:1px; transform:scaleX(0); transform-origin:left;
+    transition:transform .2s ease; opacity:.8;
+  }
+  .navbar-nav .nav-link:hover::after{ transform:scaleX(1); }
+  .cd-slider-nav .nav-item.selected .nav-link::after{ display:none; }
+}
+
+/* Mobile collapse tray */
+@media (max-width:991px){
+  #tmNavbar{
+    background: rgba(0,0,0,.5);
+    border-radius:12px; padding:8px; margin-top:8px;
+  }
+  .navbar-toggler{ background:rgba(255,255,255,.2); color:#fff; }
+}
+
+/* ==== Konten turun setinggi navbar (dinamis lewat JS) ==== */
+:root{ --nav-h: 120px; }
+.cd-hero-slider{ padding-top: var(--nav-h); }
+
+/* Compact saat scroll */
+body.nav-compact .tm-navbar-bg{
+  padding:6px 12px;
+  background: linear-gradient(180deg, rgba(0,0,0,.32), rgba(0,0,0,.22));
+}
+body.nav-compact .cd-slider-nav a.navbar-brand img{ height:50px; }
+
+/* Pastikan tidak ada offset minus dari style lama */
+.cd-full-width .container-fluid{ margin-top:0 !important; padding-top:0 !important; }
 
