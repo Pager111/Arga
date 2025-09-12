@@ -30,6 +30,25 @@ http://www.templatemo.com/tm-497-upper
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
           <![endif]-->
+	<!-- Slick Slider CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<style>
+  .tm-drone-slider img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .tm-drone-slider {
+    margin: 40px auto;
+    max-width: 1000px;
+  }
+  .slick-prev:before, .slick-next:before {
+    color: white;
+    font-size: 30px;
+  }
+</style>
+
 </head>
 
     <body>
@@ -59,10 +78,10 @@ http://www.templatemo.com/tm-497-upper
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#0" data-no="3">Tactical</a>
-                                </li>
+                               </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#0" data-no="4">Pendaftaran</a>
-                                </li>
+                                    <a class="nav-link" href="#0" data-no="4">Pendaftaran</a>  
+                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#0" data-no="5">About Us</a>
                                 </li>
@@ -113,6 +132,7 @@ http://www.templatemo.com/tm-497-upper
                 
                 <!-- Page 2 Drones -->
                 
+<!-- Page 2 Drones -->
 <li>                    
   <div class="cd-full-width first-gallery">
     <!-- Video Background -->
@@ -122,20 +142,25 @@ http://www.templatemo.com/tm-497-upper
     </video>
 
     <div class="container-fluid js-tm-page-content" data-page-no="2" data-page-type="gallery">
-      <div class="tm-img-gallery-info-container">
-  <div class="first-gallery-text">                                    
-    <h2 class="tm-text-title tm-gallery-title tm-white">
-      <span class="tm-white">Discover Our Innovations</span>
-    </h2>
-  </div>
-  <div class="first-gallery-image">
-    <img src="img/tarra-01.png" alt="Image" class="gallery-title-img">
-  </div>
-</div>
-                                 
+      <div class="tm-img-gallery-info-container text-center first-gallery-text">
+        <h2 class="tm-text-title tm-gallery-title tm-white">
+          <span class="tm-white">Discover Our Innovations</span>
+        </h2>
+
+        <!-- Tambahkan slider di sini -->
+        <div class="tm-drone-slider">
+          <div><img src="img/drone-01.jpg" alt="Drone 1"></div>
+          <div><img src="img/drone-02.jpg" alt="Drone 2"></div>
+          <div><img src="img/drone-03.jpg" alt="Drone 3"></div>
+          <div><img src="img/drone-04.jpg" alt="Drone 4"></div>
+          <div><img src="img/drone-05.jpg" alt="Drone 5"></div>
+		  <div><img src="img/drone-06.jpg" alt="Drone 5"></div>	
+        </div>
       </div>
-    </div>                                                                        
+    </div>
+  </div>                                                                        
 </li>
+
 
 
                 <!-- Page 3 Gallery Two -->
@@ -223,54 +248,68 @@ http://www.templatemo.com/tm-497-upper
         <div class="container-fluid js-tm-page-content" data-page-no="4" data-page-type="gallery">                        
             <div class="tm-img-gallery-container tm-img-gallery-container-3">
 
-                <!-- FORM PENDAFTARAN -->
-                <div class="tm-bg-white-translucent tm-textbox tm-textbox-padding">
-                    <h2 class="tm-text-title">Form Pendaftaran Lomba</h2>
-                    <form action="process.php" method="post" class="tm-contact-form">
+               <!-- FORM PENDAFTARAN -->
+<div class="tm-bg-white-translucent tm-textbox tm-textbox-padding">
+  <h2 class="tm-text-title">Form Pendaftaran Lomba</h2>
 
-                        <!-- Nama Tim -->
-                        <div class="form-group">
-                            <label for="nama_tim">Nama Tim:</label>
-                            <input type="text" id="nama_tim" name="nama_tim" class="form-control" required>
-                        </div>
+  <!-- GANTI: action ke endpoint Formspree, tambah id dan elemen status -->
+  <form action="https://formspree.io/f/xblabdpv" method="POST" class="tm-contact-form" id="form-daftar" accept-charset="utf-8">
+    
+    <!-- Nama Tim -->
+    <div class="form-group">
+      <label for="nama_tim">Nama Tim:</label>
+      <input type="text" id="nama_tim" name="nama_tim" class="form-control" required>
+    </div>
 
-                        <!-- Nama Anggota Tim -->
-                        <div class="form-group">
-                            <label for="anggota_tim">Nama Anggota Tim:</label>
-                            <textarea id="anggota_tim" name="anggota_tim" class="form-control" rows="3" placeholder="Pisahkan dengan koma jika lebih dari satu" required></textarea>
-                        </div>
+    <!-- Nama Anggota Tim -->
+    <div class="form-group">
+      <label for="anggota_tim">Nama Anggota Tim:</label>
+      <textarea id="anggota_tim" name="anggota_tim" class="form-control" rows="3" placeholder="Pisahkan dengan koma jika lebih dari satu" required></textarea>
+    </div>
 
-                        <!-- Checkbox Bidang Lomba -->
-                        <div class="form-group">
-                            <label>Bidang Lomba yang Diikuti:</label><br>
-                            <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Dropping Cargo"> Inovasi Desain Drone Dropping Cargo</label><br>
-                            <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Tepat Sasaran"> Inovasi Desain Drone Tepat Sasaran</label><br>
-                            <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Teknologi Terbaru"> Inovasi Desain Drone Teknologi Terbaru</label>
-                        </div>
+    <!-- Checkbox Bidang Lomba -->
+    <div class="form-group">
+      <label>Bidang Lomba yang Diikuti:</label><br>
+      <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Dropping Cargo"> Inovasi Desain Drone Dropping Cargo</label><br>
+      <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Tepat Sasaran"> Inovasi Desain Drone Tepat Sasaran</label><br>
+      <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Teknologi Terbaru"> Inovasi Desain Drone Teknologi Terbaru</label>
+    </div>
 
-                        <!-- Asal Instansi -->
-                        <div class="form-group">
-                            <label for="instansi">Asal Instansi:</label>
-                            <input type="text" id="instansi" name="instansi" class="form-control" required>
-                        </div>
+    <!-- Asal Instansi -->
+    <div class="form-group">
+      <label for="instansi">Asal Instansi:</label>
+      <input type="text" id="instansi" name="instansi" class="form-control" required>
+    </div>
 
-                        <!-- Nomor Telepon -->
-                        <div class="form-group">
-                            <label for="telepon">Nomor Telepon (WhatsApp):</label>
-                            <input type="text" id="telepon" name="telepon" class="form-control" required>
-                        </div>
+    <!-- Nomor Telepon -->
+    <div class="form-group">
+      <label for="telepon">Nomor Telepon (WhatsApp):</label>
+      <input type="text" id="telepon" name="telepon" class="form-control" required>
+    </div>
 
-                        <!-- Email -->
-                        <div class="form-group">
-                            <label for="email">Email Aktif:</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email Aktif:</label>
+      <input type="email" id="email" name="email" class="form-control" required>
+    </div>
 
-                        <!-- Tombol Submit -->
-                        <button type="submit" class="pull-xs-right tm-submit-btn">Daftar Sekarang</button>
-                    </form>
-                </div>
-                <!-- END FORM PENDAFTARAN -->
+    <!-- Anti-bot honeypot (disembunyikan) -->
+    <input type="text" name="_gotcha" style="display:none">
+
+    <!-- Subjek email (opsional) -->
+    <input type="hidden" name="_subject" value="Pendaftaran Baru dari Website">
+
+    <!-- Redirect setelah sukses (opsional) -->
+    <!-- <input type="hidden" name="_redirect" value="https://namadomain.com/terima-kasih.html"> -->
+
+    <button type="submit" class="pull-xs-right tm-submit-btn">Daftar Sekarang</button>
+
+    <!-- Tempat status -->
+    <p id="status-daftar" style="margin-top:10px;"></p>
+  </form>
+</div>
+<!-- END FORM PENDAFTARAN -->
+
 
             </div>                                                    
         </div>                                                
@@ -532,10 +571,59 @@ http://www.templatemo.com/tm-497-upper
             });
 
         </script>            
+<!-- Slick Slider JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('.tm-drone-slider').slick({
+      centerMode: true,
+      centerPadding: '60px',
+      slidesToShow: 3,
+      autoplay: true,
+      autoplaySpeed: 2500,
+      arrows: true,
+      responsive: [
+        { breakpoint: 1024, settings: { slidesToShow: 2, centerPadding: '40px' }},
+        { breakpoint: 768, settings: { slidesToShow: 1, centerPadding: '20px' }}
+      ]
+    });
+  });
+</script>
+<script>
+  (function(){
+    const form = document.getElementById('form-daftar');
+    const statusEl = document.getElementById('status-daftar');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      statusEl.textContent = 'Mengirim...';
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' } // penting untuk respon JSON
+        });
+
+        if (res.ok) {
+          statusEl.textContent = 'Terkirim! Kami akan menghubungi Anda via email.';
+          form.reset();
+        } else {
+          const data = await res.json().catch(()=>null);
+          const msg = data && data.errors ? data.errors.map(e=>e.message).join(', ') : 'Gagal mengirim.';
+          statusEl.textContent = msg;
+        }
+      } catch(err){
+        statusEl.textContent = 'Gagal konek: ' + err;
+      }
+    });
+  })();
+</script>
 
 </body>
 
 </html>
-
 
 
