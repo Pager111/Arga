@@ -346,3 +346,8 @@ figure.effect-ruby:hover img{opacity:.2;transform:scale(1);}
 a:focus-visible, .tm-submit-btn:focus-visible, .btn-daftar-fixed:focus-visible{
   outline:3px solid #2277EE; outline-offset:2px;
 }
+/* Tampilkan hanya slide yang .selected */
+.cd-hero-slider > li { display: none; }
+.cd-hero-slider > li.selected { display: block; }
+
+
