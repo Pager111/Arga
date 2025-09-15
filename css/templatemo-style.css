@@ -540,9 +540,63 @@ div[data-page-no="6"] .tm-contact-info{
 
 .page-wrap{ padding: 110px 16px 40px; } /* sebelumnya 90px */
 
+/* =========================
+   CLEAN OVERRIDES — AYK
+   ========================= */
+
+/* 1) Navbar: full-width fixed, transparan tipis, tanpa “bubble” */
+.cd-slider-nav{
+  position:fixed; top:0; left:0; right:0; z-index:1002; background:transparent;
+}
+.tm-navbar-bg{
+  background:rgba(0,0,0,.18) !important;   /* ~82% transparan */
+  padding:10px 16px;
+  margin:0 !important; max-width:none !important;
+  border:0 !important; border-radius:0 !important; box-shadow:none !important;
+  display:flex; align-items:center; justify-content:space-between;
+}
+#tmNavbar{ background:rgba(0,0,0,.60) !important; } /* tray saat collapse */
+
+/* Link menu: jangan paksa width/height tetap */
+.cd-slider-nav a,
+.navbar-nav .nav-link{
+  width:auto !important; height:auto !important;
+  display:inline-flex; align-items:center;
+  padding:10px 18px; border-radius:999px;
+  color:#fff !important;
+}
+.cd-slider-nav .nav-item.selected .nav-link,
+.cd-slider-nav .nav-link:hover,
+.cd-slider-nav .nav-link:focus{
+  background:rgba(255,255,255,.15) !important; color:#fff !important;
+}
+
+/* 2) Dorong konten turun setinggi navbar */
+:root{ --nav-h: 100px; }                 /* desktop */
+@media (max-width:480px){ :root{ --nav-h: 80px; } }  /* mobile */
+.cd-hero-slider{ padding-top: var(--nav-h); }
+
+/* Hapus offset negatif/duplikat dari tema lama */
+.cd-full-width .container-fluid{ margin-top:0 !important; padding-top:0 !important; }
+@media (min-width:480px){
+  .cd-full-width .container-fluid{ margin-top:0 !important; } /* ngebatalin -80px lama */
+}
+
+/* 3) Biarkan Bootstrap yang atur kolom — jangan override width sendiri */
+.tm-3-col-textbox{ width:auto !important; max-width:100%; float:none; }
+
+/* 4) Slick slider & hero judul aman di layar kecil */
+@media (max-width:576px){
+  .first-gallery-text .tm-gallery-title{ font-size:30px; }
+}
+
+/* 5) Map iframe responsive penuh */
+#google-map{ position:relative; height:430px; }
+#google-map iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 
 
 /* */
 /* */
+
 
 
