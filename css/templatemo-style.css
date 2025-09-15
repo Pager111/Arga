@@ -428,7 +428,7 @@ a:focus-visible, .tm-submit-btn:focus-visible, .btn-daftar-fixed:focus-visible{
 }
 
 
-/*untuk style navbar
+/*untuk style navbar */
 /* ==== Floating translucent navbar (tanpa blur) ==== */
 .cd-slider-nav{
   position: fixed; top:0; left:0; right:0; z-index:1002; background: transparent;
@@ -539,4 +539,91 @@ div[data-page-no="6"] .tm-contact-info{
 }
 
 .page-wrap{ padding: 110px 16px 40px; } /* sebelumnya 90px */
+
+
+
+/* */
+/* */
+/* ==== Mobile tidy pack ==== */
+
+/* Pastikan slider tidak ketutup navbar */
+:root{ --nav-h: 110px; }
+@media (max-width:480px){ :root{ --nav-h: 80px; } }
+.cd-hero-slider{ padding-top: var(--nav-h); }
+
+/* Pakai viewport dinamis biar tinggi full di mobile */
+@supports (height: 100dvh){
+  .cd-hero-slider{ height: 100dvh; }
+}
+
+/* Navbar rapi saat sempit */
+.tm-navbar-bg{
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+}
+.cd-slider-nav a.navbar-brand img{ height: 46px; }
+@media (max-width:480px){
+  .cd-slider-nav a.navbar-brand img{ height: 40px; }
+}
+
+/* Tray menu mobile lebih lega */
+@media (max-width: 991px){
+  #tmNavbar{
+    width:100%;
+    background: rgba(0,0,0,.75) !important;
+    border-radius:12px;
+    padding:8px;
+    margin-top:6px;
+  }
+  .navbar-nav{ gap: 4px; }
+  .navbar-nav .nav-link{
+    height:auto; width:auto;
+    padding:10px 14px;
+    border-radius:9999px;
+  }
+}
+
+/* Headline & teks di section video/slider biar gak kegedean */
+.first-gallery-text .tm-gallery-title{
+  font-size: 42px;
+}
+@media (max-width:576px){
+  .first-gallery-text .tm-gallery-title{ font-size: 30px; }
+}
+
+/* Tiga kotak di Home: full width di mobile & tinggi auto */
+.tm-3-col-textbox{ width:100% !important; max-width:100%; }
+.tm-3-col-textbox-inner{ height:auto; min-height:260px; overflow:visible; }
+
+/* 2 kolom About & Contact jadi stack di mobile */
+@media (max-width: 991px){
+  .tm-flex{ display:block; }
+  .tm-2-col-textbox-2{ margin-right:0; margin-bottom:20px; }
+}
+
+/* Gallery halaman 2 & 3: tengah & padding aman */
+.tm-img-gallery-info-container.text-center{
+  max-width: 100%;
+  padding-left: 12px; padding-right: 12px;
+}
+
+/* Video background: pastikan render penuh */
+.first-gallery .gallery-video{
+  min-height: 100%;
+  pointer-events: none; /* biar swipe tidak ke-block video */
+}
+
+/* Form controls: font-size agak kecil di layar mini */
+@media (max-width: 360px){
+  .form-control, .tm-submit-btn{ font-size: 15px; }
+}
+
+/* Pendaftaran.html: logo fixed kiri/kanan tidak tabrakan di mobile */
+@media (max-width: 576px){
+  .logo-fixed span{ display:none; }  /* sembunyikan teks “ARGA YASA KIRNA” */
+  .logo-fixed img{ height:34px; }
+  .logo-right-group{ gap:6px; padding:4px 6px; right:10px; top:10px; }
+  .logo-right-group img{ height:30px; }
+}
 
