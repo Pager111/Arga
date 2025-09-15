@@ -253,25 +253,41 @@ We stand behind products you can trust, built to exacting standards, with long-t
                                             <div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding tm-textbox-padding-contact">
                                                 <h2 class="tm-contact-info">Contact Us</h2>
                                                 <p class="tm-text">Praesent tempus dapibus odio nec elementum. Sed elementum est quis tortor faucibus, et molestie nibh finibus. Mauris condimentum ex vestibulum fringilla consectetur.</p>                                                
-                                                
-                                                <!-- contact form -->
-                                                <form action="index.html" method="post" class="tm-contact-form">
+                                                <!-- contact form (Formspree) -->
+<form action="https://formspree.io/f/xblabdpv" method="POST"
+      class="tm-contact-form" id="contact-form" accept-charset="utf-8">
 
-                                                    <div class="form-group">
-                                                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
-                                                    </div>
-                                        
-                                                    <div class="form-group">                                                        
-                                                        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
-                                                    </div>                                                        
-                                                    
-                                                    <div class="form-group">
-                                                        <textarea id="contact_message" name="contact_message" class="form-control" rows="5" placeholder="Your message" required></textarea>
-                                                    </div> 
+  <div class="form-group">
+    <input type="text" id="contact_name" name="name" class="form-control"
+           placeholder="Name" required />
+  </div>
 
-                                                    <button type="submit" class="pull-xs-right tm-submit-btn">Send</button>  
-                                                
-                                                </form>  
+  <div class="form-group">
+    <input type="email" id="contact_email" name="email" class="form-control"
+           placeholder="Email" required />
+  </div>
+
+  <div class="form-group">
+    <textarea id="contact_message" name="message" class="form-control" rows="5"
+              placeholder="Your message" required></textarea>
+  </div>
+
+  <!-- Anti-bot honeypot -->
+  <input type="text" name="_gotcha" style="display:none">
+
+  <!-- Metadata opsional -->
+  <input type="hidden" name="_subject" value="Contact message from argayasakirna.com">
+  <!-- Jika mau redirect setelah sukses, buka baris ini dan ubah URL:
+  <input type="hidden" name="_redirect" value="https://argayasakirna.com/terima-kasih.html">
+  -->
+  <input type="hidden" name="form_type" value="contact">
+
+  <button type="submit" class="pull-xs-right tm-submit-btn">Send</button>
+
+  <!-- status -->
+  <p id="status-contact" style="margin-top:10px;"></p>
+</form>
+
                                             </div>
 
                                             <div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding tm-textbox-padding-contact">
@@ -546,8 +562,41 @@ toggleDaftarButtonByPageNo(pageNo);
   });
 </script>
 
+		<script>
+  (function(){
+    const form = document.getElementById('contact-form');
+    if(!form) return;
+
+    const statusEl = document.getElementById('status-contact');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      statusEl.textContent = 'Sending...';
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          statusEl.textContent = 'Message sent! We will get back to you shortly.';
+          form.reset();
+        } else {
+          const data = await res.json().catch(()=>null);
+          const msg = data && data.errors ? data.errors.map(e=>e.message).join(', ') : 'Failed to send.';
+          statusEl.textContent = msg;
+        }
+      } catch(err){
+        statusEl.textContent = 'Connection error: ' + err;
+      }
+    });
+  })();
+</script>
+
 		
 </body>
 
 </html>
-
