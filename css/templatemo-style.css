@@ -513,3 +513,30 @@ div[data-page-no="6"] .tm-contact-info{
   background-clip: text;
   color: transparent;
 }
+
+/* Grup 3 logo kanan — gaya disamakan dengan .logo-fixed */
+.logo-right-group{
+  position:fixed; top:16px; right:16px; z-index:10;
+  display:flex; align-items:center; gap:12px;
+  padding:6px 10px;
+  background: rgba(255,255,255,.65);
+  border-radius:8px;
+  backdrop-filter: blur(4px);
+}
+
+.logo-right-item{ display:inline-flex; align-items:center; transition:transform .15s ease; }
+.logo-right-item:hover{ transform: translateY(-1px); }
+
+.logo-right-group img{
+  height:46px;                /* sama seperti .logo-fixed img */
+  width:auto; display:block; object-fit:contain;
+}
+
+/* Responsif kecil: samakan tingginya dgn .logo-fixed di breakpoint yang sama */
+@media (max-width: 480px){
+  .logo-right-group{ gap:8px; padding:6px 8px; }
+  .logo-right-group img{ height:38px; }
+}
+
+.page-wrap{ padding: 110px 16px 40px; } /* sebelumnya 90px */
+
