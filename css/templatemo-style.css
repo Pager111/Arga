@@ -506,3 +506,10 @@ body.nav-compact .cd-slider-nav a.navbar-brand img{ height:50px; }
 /* Pastikan tidak ada offset minus dari style lama */
 .cd-full-width .container-fluid{ margin-top:0 !important; padding-top:0 !important; }
 
+/* Page 6: kedua heading "Contact Us" & "alamat" */
+div[data-page-no="6"] .tm-contact-info{
+  background: linear-gradient(90deg, #e41e26, #ff9b00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
