@@ -594,9 +594,62 @@ div[data-page-no="6"] .tm-contact-info{
 #google-map{ position:relative; height:430px; }
 #google-map iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 
+/* === NAVBAR: kapsul, center, dark translucent === */
+@media (min-width: 992px){
+  .tm-navbar-bg{
+    max-width: 1240px;              /* lebar kapsul */
+    margin: 12px auto;               /* center */
+    padding: 12px 20px;
+    background: rgba(0,0,0,.85) !important;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+}
+.cd-slider-nav a,
+.navbar-nav .nav-link{
+  width:auto !important; height:auto !important;
+  display:inline-flex; align-items:center;
+  padding:10px 18px; border-radius:999px;
+  color:#fff !important;
+}
+.cd-slider-nav .nav-item.selected .nav-link,
+.cd-slider-nav .nav-link:hover,
+.cd-slider-nav .nav-link:focus{
+  background: rgba(255,255,255,.15) !important;
+  color:#fff !important;
+}
+
+/* === Batas lebar konten halaman (biar sejajar dengan navbar) === */
+.cd-full-width .container-fluid.tm-page-pad,
+.cd-full-width .container-fluid.tm-page-width{
+  max-width: 1240px;
+  margin-left:auto; margin-right:auto;
+  padding-left: 15px; padding-right: 15px;
+}
+
+/* === Hero/Home 3 kotak: pastikan grid rapi === */
+.tm-3-col-textbox{ width:100%; }
+.tm-3-col-textbox-inner{
+  min-height: 300px;                /* tinggi konsisten */
+  display:flex; flex-direction:column; justify-content:center;
+}
+
+/* === Padding top: konten turun setinggi navbar === */
+:root{ --nav-h: 100px; }
+@media (max-width: 480px){ :root{ --nav-h: 80px; } }
+.cd-hero-slider{ padding-top: var(--nav-h); }
+
+/* Hapus offset bawaan tema yang mengangkat konten */
+.cd-full-width .container-fluid{ margin-top:0 !important; padding-top:0 !important; }
+
+/* Peta responsive penuh kotaknya */
+#google-map{ position:relative; height:430px; }
+#google-map iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 
 /* */
 /* */
+
 
 
 
