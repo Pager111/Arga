@@ -637,3 +637,27 @@ div[data-page-no="6"] .tm-contact-info{
 @media (max-width: 480px){
   .page-wrap{ padding-top: 125px !important; }  /* sebelumnya 100px */
 }
+/* ===== Logo bar di mobile: 1 baris, lebih kecil ===== */
+@media (max-width: 480px){
+  .logo-right-group{
+    left: 50%;
+    transform: translateX(-50%);  /* tetap center */
+    right: auto;
+    flex-wrap: nowrap;             /* jangan bungkus ke baris baru */
+    gap: 6px;
+    padding: 6px 8px;
+    white-space: nowrap;           /* jaga tetap 1 baris */
+  }
+  .logo-right-group img{
+    height: 26px;                  /* perkecil supaya muat 1 baris */
+  }
+  /* turunkan form agar tidak ketabrak logo */
+  .page-wrap{ padding-top: 120px; }
+}
+
+/* Tablet kecil juga dibikin lebih ramping sedikit */
+@media (min-width: 481px) and (max-width: 768px){
+  .logo-right-group{ flex-wrap: nowrap; gap: 8px; }
+  .logo-right-group img{ height: 34px; }
+}
+
