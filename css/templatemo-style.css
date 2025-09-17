@@ -661,5 +661,42 @@ div[data-page-no="6"] .tm-contact-info{
   .logo-right-group img{ height: 34px; }
 }
 
+/* ===== Mobile: logo bar rapat, 1 baris, full lebar, center ===== */
+@media (max-width: 480px){
+  .logo-right-group{
+    position: fixed;
+    top: 10px;
+    left: 10px;              /* batasi kiri-kanan supaya tidak keluar layar */
+    right: 10px;
+    transform: none;         /* jangan translateX, cukup pakai left+right */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;       /* tetap 1 baris */
+    gap: 4px;
+    padding: 6px 8px;
+    max-width: none;         /* biar lebar mengikuti viewport */
+    white-space: nowrap;
+  }
+  .logo-right-group img{
+    height: 18px;            /* diperkecil lagi */
+    width: auto;
+    display: block;
+  }
+  /* turunkan form agar tidak nabrak logo bar */
+  .page-wrap{ padding-top: 140px; }
+}
+
+/* Tablet kecil: sedikit lebih besar tapi tetap 1 baris */
+@media (min-width: 481px) and (max-width: 768px){
+  .logo-right-group{
+    left: 12px; right: 12px;
+    gap: 6px;
+  }
+  .logo-right-group img{ height: 28px; }
+  .page-wrap{ padding-top: 130px; }
+}
+
+
+
 
 
