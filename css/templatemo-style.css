@@ -678,7 +678,7 @@ div[data-page-no="6"] .tm-contact-info{
     white-space: nowrap;
   }
   .logo-right-group img{
-    height: 18px;            /* diperkecil lagi */
+    height: 10px;            /* diperkecil lagi */
     width: auto;
     display: block;
   }
@@ -695,6 +695,7 @@ div[data-page-no="6"] .tm-contact-info{
   .logo-right-group img{ height: 28px; }
   .page-wrap{ padding-top: 130px; }
 }
+
 
 
 
