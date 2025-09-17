@@ -649,7 +649,7 @@ div[data-page-no="6"] .tm-contact-info{
     white-space: nowrap;           /* jaga tetap 1 baris */
   }
   .logo-right-group img{
-    height: 20px;                  /* perkecil supaya muat 1 baris */
+    height: 15px;                  /* perkecil supaya muat 1 baris */
   }
   /* turunkan form agar tidak ketabrak logo */
   .page-wrap{ padding-top: 120px; }
@@ -660,5 +660,6 @@ div[data-page-no="6"] .tm-contact-info{
   .logo-right-group{ flex-wrap: nowrap; gap: 8px; }
   .logo-right-group img{ height: 34px; }
 }
+
 
 
