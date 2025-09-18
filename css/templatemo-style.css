@@ -729,6 +729,46 @@ div[data-page-no="6"] .tm-contact-info{
   .tm-submit-btn, .tm-btn-secondary{ width:100%; text-align:center; }
 }
 
+/* nambah responsif kecilin gambar
+
+/* === Logo partner responsif (pendaftaran.html) === */
+.logo-right-group{
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);     /* pusatkan di atas */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;                  /* boleh 2 baris kalau sempit */
+  gap: clamp(4px, 1.4vw, 12px);
+  padding: 6px 10px;
+  max-width: 96vw;                  /* cegah melebar keluar layar */
+  background: rgba(255,255,255,.65);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+
+.logo-right-item{ flex: 0 1 auto; }
+
+.logo-right-group img{
+  /* Tinggi gambar mengecil otomatis saat viewport mengecil */
+  height: clamp(18px, 6vw, 46px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Tambah ruang di atas form saat layar makin kecil
+   (supaya kartu form tidak nabrak grup logo) */
+@media (max-width: 768px){
+  .page-wrap{ padding-top: 150px; }
+}
+@media (max-width: 480px){
+  .page-wrap{ padding-top: 180px; }
+}
+
 
 
 
