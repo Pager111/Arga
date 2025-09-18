@@ -360,9 +360,28 @@
   // Kalau font / gambar selesai load agak terlambat
   document.fonts && document.fonts.ready && document.fonts.ready.then(adjustFormTop);
 </script>
+<script>
+(function(){
+  const ta = document.getElementById('profil');
+  const count = document.getElementById('profil-count');
+  const hint = document.getElementById('profil-hint');
+
+  function update(){
+    const max = parseInt(ta.getAttribute('maxlength')||800,10);
+    const len = ta.value.length;
+    count.textContent = `${len}/${max}`;
+    // warna peringatan
+    hint.className = 'hint' + (len > max-50 ? ' warn' : '');
+  }
+  ta.addEventListener('input', update);
+  ta.addEventListener('blur', update);
+  update();
+})();
+</script>
 
 </body>
 </html>
+
 
 
 
