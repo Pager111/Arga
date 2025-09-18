@@ -326,8 +326,31 @@
       });
     })();
   </script>
+
+	<script>
+  // Turunkan form sesuai tinggi kotak logo (1 atau 2 baris)
+  function adjustFormTop(){
+    const bar  = document.querySelector('.logo-right-group');
+    const wrap = document.querySelector('.page-wrap');
+    if(!bar || !wrap) return;
+
+    // Tinggi aktual elemen + ruang napas
+    const h = bar.offsetHeight;         // sudah termasuk 1/2 baris
+    const extra = 28;                   // ruang tambahan biar lega
+    wrap.style.paddingTop = (h + extra) + 'px';
+  }
+
+  // Jalankan saat load & resize (landscape/portrait, zoom, dll.)
+  window.addEventListener('load', adjustFormTop);
+  window.addEventListener('resize', adjustFormTop);
+
+  // Kalau font / gambar selesai load agak terlambat
+  document.fonts && document.fonts.ready && document.fonts.ready.then(adjustFormTop);
+</script>
+
 </body>
 </html>
+
 
 
 
