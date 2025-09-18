@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Penilaian Kategori Kompetisi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0d10;           /* warna latar */
+      --panel:#0f1b2d;        /* biru gelap transparan */
+      --panel-grad: linear-gradient(180deg, #174a8a 0%, #0e3563 100%);
+      --panel-border: rgba(255,255,255,.14);
+      --text:#e9edf3;         /* warna teks umum */
+      --muted:#b8c1cc;        /* teks sekunder */
+      --accent:#3aa3ff;       /* aksen */
+      --badge:#0bd46f;        /* warna badge nomor */
+      --card:#11161c;         /* latar kartu */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(70% 120% at 80% 0%, #141a22 0%, var(--bg) 60%), var(--bg);
+      color:var(--text);
+      font: 16px/1.6 "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      letter-spacing:.2px;
+    }
+
+    .wrapper{max-width:1200px;margin:0 auto;padding:40px 16px 72px}
+
+    .page-title{
+      font-weight:800; font-size:clamp(22px, 3.4vw, 40px);
+      text-align:center; margin:10px 0 28px;
+      letter-spacing:.3px;
+    }
+
+    /* grid of cards */
+    .grid{display:grid; gap:22px}
+    @media (min-width: 920px){ .grid{ grid-template-columns: 1fr; } }
+
+    /* each slide-like card */
+    .card{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      background:
+        radial-gradient(1200px 400px at 120% 30%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 20%),
+        var(--card);
+      box-shadow:0 10px 40px rgba(0,0,0,.45);
+      padding: clamp(18px, 3vw, 28px);
+      isolation:isolate;
+    }
+
+    /* big heading on each card */
+    .card .heading{
+      text-align:center; font-weight:800; font-size:clamp(18px, 2.6vw, 28px);
+      margin:6px 0 16px;
+    }
+
+    .row{
+      display:grid; align-items:stretch; gap:18px;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+    }
+    @media (max-width: 880px){ .row{ grid-template-columns: 1fr; } }
+
+    /* left blue panel */
+    .panel{
+      position:relative;
+      border-radius:14px;
+      background: var(--panel-grad);
+      color:#f6fbff;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 20px 40px rgba(0,0,0,.35);
+      padding:18px 18px 18px 20px;
+    }
+    .panel .panel-title{
+      font-weight:800; font-size:clamp(15px, 1.6vw, 18px);
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.2);
+      padding:10px 12px; border-radius:10px; display:inline-block; margin-bottom:10px;
+    }
+    .panel ul{ margin: 10px 0 0 0; padding:0 0 0 18px; }
+    .panel li{ margin:8px 0; }
+
+    /* right side: artwork + description */
+    .art{
+      position:relative; border-radius:14px; height:100%;
+      background:
+        radial-gradient(600px 240px at 20% 40%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 50%),
+        #0d1218;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      padding:16px;
+      display:grid; grid-template-rows:auto 1fr; gap:8px;
+      min-height: 280px;
+    }
+    .art .canvas{ position:relative; flex:1; min-height:180px; }
+    .art .desc{ color:var(--muted); font-size:15px; }
+
+    /* simple iconography using inline SVG */
+    .icon{ opacity:.95; }
+    .icon svg{ display:block; width: clamp(80px, 16vw, 160px); height:auto; }
+
+    /* dotted path and target */
+    .dotted{ position:absolute; inset:auto 16px 16px 16px; height:100px; pointer-events:none; }
+    .dotted .line{ position:absolute; top:50%; left:0; right:0; height:0; border-top:3px dotted rgba(255,255,255,.35); transform: translateY(-50%); }
+    .target{ position:absolute; right:0; top:50%; transform: translate(40%, -50%); opacity:.9; }
+    .target svg{ width: clamp(60px, 10vw, 120px); height:auto; }
+
+    /* corner badge number */
+    .badge{
+      position:absolute; right:14px; bottom:14px; z-index:3;
+      width:38px; height:38px; border-radius:999px;
+      display:grid; place-items:center; font-weight:800; background:var(--badge); color:#002b12;
+      box-shadow: 0 8px 20px rgba(11,212,111,.35), inset 0 -3px 0 rgba(0,0,0,.25);
+    }
+
+    /* subtle watermark fan (SVG background) */
+    .watermark{
+      position:absolute; inset:-20% -10% auto auto; opacity:.06; transform: rotate(-8deg);
+      pointer-events:none; z-index:0;
+    }
+    .watermark svg{ width:560px; height:auto; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1 class="page-title">Penilaian Kategori Kompetisi</h1>
+
+    <div class="grid">
+      <!-- CARD 1: Dropping Cargo -->
+      <section class="card" aria-labelledby="h1">
+        <div class="watermark" aria-hidden="true">
+          <!-- simple rotor watermark -->
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="80" stroke="white" stroke-width="10"/>
+            <circle cx="100" cy="100" r="40" stroke="white" stroke-width="10"/>
+            <rect x="95" y="10" width="10" height="40" fill="white"/>
+            <rect x="150" y="95" width="40" height="10" fill="white"/>
+            <rect x="10" y="95" width="40" height="10" fill="white"/>
+            <rect x="95" y="150" width="10" height="40" fill="white"/>
+          </svg>
+        </div>
+        <h2 id="h1" class="heading">Penilaian Kategori Kompetisi</h2>
+        <div class="row">
+          <aside class="panel">
+            <div class="panel-title">Inovasi Desain Drone<br>Dropping Cargo</div>
+            <ul>
+              <li>Dropping object min 1,5 kg</li>
+              <li>Hover minimal 10 menit</li>
+              <li>Akurasi radius: 1 m, 3 m, 5 m</li>
+              <li>Ketinggian minimal 60 m</li>
+              <li>Kecepatan: 0, 5, 10, 15 m/s</li>
+              <li>GCS &amp; video streaming</li>
+              <li>Penilaian desain: tampilan, dimensi, mobilitas, fitur tambahan</li>
+            </ul>
+          </aside>
+          <div class="art">
+            <div class="canvas">
+              <div class="icon">
+                <!-- drone delivery icon -->
+                <svg viewBox="0 0 256 160" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="#EAF6FF">
+                    <rect x="36" y="38" width="44" height="8" rx="4"/>
+                    <rect x="176" y="38" width="44" height="8" rx="4"/>
+                    <rect x="88" y="50" width="80" height="10" rx="5"/>
+                    <rect x="104" y="60" width="48" height="16" rx="8"/>
+                    <rect x="116" y="76" width="24" height="18" rx="4"/>
+                    <!-- box -->
+                    <rect x="112" y="96" width="32" height="26" rx="4" fill="#bfe6ff"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="dotted" aria-hidden="true">
+                <div class="line"></div>
+                <div class="target">
+                  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="46" stroke="#EAF6FF" stroke-width="6" fill="none"/>
+                    <circle cx="60" cy="60" r="16" stroke="#EAF6FF" stroke-width="6" fill="none"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <p class="desc"><strong>Dropping Cargo</strong> adalah tantangan dimana teknologi drone diuji kemampuannya membawa beban tambahan (payload) sambil tetap terbang stabil, bermanuver, dan menyelesaikan misi tertentu. <em>Kriteria:</em> Berat beban, Kecepatan, Drone pilot ke target (Akurasi), dll.</p>
+          </div>
+        </div>
+        <div class="badge" aria-label="Slide 6">6</div>
+      </section>
+
+      <!-- CARD 2: Tepat Sasaran -->
+      <section class="card" aria-labelledby="h2">
+        <h2 id="h2" class="heading">Penilaian Kategori Kompetisi</h2>
+        <div class="row">
+          <aside class="panel">
+            <div class="panel-title">Inovasi Desain Drone<br>Tepat Sasaran</div>
+            <ul>
+              <li>Payload minimal 1 kg</li>
+              <li>Hover/terbang minimal 15 menit</li>
+              <li>Ketinggian awal min 40 m</li>
+              <li>Kecepatan serangan: 10, 15, 20 m/s</li>
+              <li>Akurasi radius: 1 m, 3 m, 5 m</li>
+              <li>GCS &amp; video streaming</li>
+              <li>Penilaian desain: tampilan, dimensi, mobilitas, fitur tambahan</li>
+            </ul>
+          </aside>
+          <div class="art">
+            <div class="canvas">
+              <div class="icon">
+                <!-- fpv drone icon -->
+                <svg viewBox="0 0 256 160" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="#EAF6FF">
+                    <rect x="24" y="36" width="64" height="10" rx="5"/>
+                    <rect x="168" y="36" width="64" height="10" rx="5"/>
+                    <rect x="96" y="52" width="64" height="20" rx="10"/>
+                    <circle cx="128" cy="90" r="14"/>
+                    <rect x="116" y="104" width="24" height="8" rx="4"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="dotted" aria-hidden="true">
+                <div class="line"></div>
+                <div class="target">
+                  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="60" r="46" stroke="#EAF6FF" stroke-width="6" fill="none"/>
+                    <circle cx="60" cy="60" r="16" stroke="#EAF6FF" stroke-width="6" fill="none"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <p class="desc">Drone dengan <strong>First Person View (FPV)</strong> memadukan skill dan kecepatan untuk menyelinap rendah, menghindari radar, serta bermanuver ke arah target yang ditentukan. <em>Kriteria:</em> Hover, Fleksibilitas, Kecepatan, Akurasi, dll.</p>
+          </div>
+        </div>
+        <div class="badge" aria-label="Slide 7">7</div>
+      </section>
+
+      <!-- CARD 3: Teknologi Terbaru -->
+      <section class="card" aria-labelledby="h3">
+        <h2 id="h3" class="heading">Penilaian Kategori Kompetisi</h2>
+        <div class="row">
+          <aside class="panel">
+            <div class="panel-title">Inovasi Drone<br>Teknologi Terbaru</div>
+            <ul>
+              <li>Paparan kasus, misi, fitur, teknologi baru</li>
+              <li>Performa, ketahanan, kebisingan, dll.</li>
+              <li>Gambar, desain 3D, perhitungan teknis</li>
+              <li>Presentasi 15 menit + Tanya jawab 20 menit</li>
+              <li>Gambaran budget dan nilai TKDN</li>
+              <li>Penilaian: desain, mobilitas, adaptasi teknologi, visibilitas manufaktur</li>
+            </ul>
+          </aside>
+          <div class="art">
+            <div class="canvas">
+              <div class="icon">
+                <!-- modern quad icon -->
+                <svg viewBox="0 0 256 160" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="#EAF6FF">
+                    <rect x="40" y="34" width="40" height="10" rx="5"/>
+                    <rect x="176" y="34" width="40" height="10" rx="5"/>
+                    <rect x="88" y="62" width="80" height="20" rx="10"/>
+                    <rect x="116" y="84" width="24" height="14" rx="6"/>
+                    <circle cx="96" cy="98" r="8"/>
+                    <circle cx="160" cy="98" r="8"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <p class="desc">Membangun generasi <strong>terbaru</strong> dari sistem drone untuk operasi modern: fokus desain, fitur &amp; teknologi, mobilitas, presisi, efisiensi biaya, serta nilai <abbr title="Tingkat Komponen Dalam Negeri">TKDN</abbr>. Dibandingkan teknologi lama, solusi baru harus lebih efektif dan mudah diproduksi.</p>
+          </div>
+        </div>
+        <div class="badge" aria-label="Slide 8">8</div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
