@@ -790,7 +790,7 @@ div[data-page-no="6"] .tm-contact-info{
 
 /* ukuran logo (sudah -20%) */
 .logo-right-group img{
-  height: clamp(14px, 4.8vw, 37px);
+  height: clamp(10px, 3vw, 30px);
   width: auto;
   display: block;
   object-fit: contain;
@@ -798,6 +798,7 @@ div[data-page-no="6"] .tm-contact-info{
 
 /* default padding atas form (nanti dioverride JS) */
 .page-wrap{ padding-top: 110px; }
+
 
 
 
