@@ -799,6 +799,67 @@ div[data-page-no="6"] .tm-contact-info{
 /* default padding atas form (nanti dioverride JS) */
 .page-wrap{ padding-top: 110px; }
 
+/* === OVERRIDE AKHIR: Logo partner tidak numpuk & pindah ke sudut === */
+
+/* default (desktop): bar tetap atas, center, single-line, scalable */
+.logo-right-group{
+  position: fixed !important;
+  top: 12px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 1005 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;             /* ← kunci: jangan pernah wrap */
+  gap: clamp(6px, 1vw, 14px) !important;
+  padding: 6px 10px !important;
+
+  background: rgba(255,255,255,.65) !important;
+  border-radius: 10px !important;
+  backdrop-filter: blur(4px) !important;
+  max-width: 96vw !important;               /* cegah melebar keluar layar */
+  overflow: hidden !important;               /* potong glow/shadow berlebih */
+}
+
+/* ukuran logo berskala sesuai lebar layar (mengecil otomatis) */
+.logo-right-group img{
+  height: clamp(16px, 4.2vw, 40px) !important;  /* desktop besar sampai kecil */
+  width: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* tablet & ke bawah: pindah ke sudut kanan atas supaya menjauh dari form */
+@media (max-width: 992px){
+  .logo-right-group{
+    left: auto !important;
+    right: 12px !important;
+    transform: none !important;
+    justify-content: flex-end !important;      /* deret ke kanan */
+    max-width: calc(100vw - 24px) !important;  /* jaga jarak kiri-kanan */
+  }
+}
+
+/* ponsel: lebih kompak lagi, tetap 1 baris */
+@media (max-width: 480px){
+  .logo-right-group{
+    gap: 6px !important;
+    padding: 5px 6px !important;
+    right: 10px !important;
+    top: 10px !important;
+  }
+  .logo-right-group img{
+    height: clamp(14px, 7vw, 22px) !important; /* makin kecil di layar sempit */
+  }
+}
+
+/* beri ruang konten di bawah bar logo (JS-mu sudah mengatur dinamis),
+   tapi tambahkan fallback kalau JS terlambat */
+.page-wrap{ padding-top: max(110px, 12px + 40px + 20px); } /* fallback aman */
+
 
 
 
