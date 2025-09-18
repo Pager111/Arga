@@ -696,6 +696,39 @@ div[data-page-no="6"] .tm-contact-info{
   .page-wrap{ padding-top: 130px; }
 }
 
+/* tombol di area aksi form */
+.form-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;         /* biar rapi kalau sempit */
+  margin-top:6px;
+}
+
+/* gaya tombol sekunder */
+.tm-btn-secondary{
+  background: rgba(255,255,255,.92);
+  color:#111 !important;
+  border: 1px solid rgba(0,0,0,.12);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size:16px;
+  font-weight:700;
+  text-decoration:none !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.tm-btn-secondary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.18);
+}
+
+/* mobile: tombol menumpuk & full width */
+@media (max-width: 576px){
+  .form-actions{ flex-direction:column; align-items:stretch; }
+  .tm-submit-btn, .tm-btn-secondary{ width:100%; text-align:center; }
+}
+
 
 
 
