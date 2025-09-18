@@ -754,7 +754,7 @@ div[data-page-no="6"] .tm-contact-info{
 
 .logo-right-group img{
   /* Tinggi gambar mengecil otomatis saat viewport mengecil */
-  height: clamp(18px, 6vw, 46px);
+  height: clamp(14px, 4.8vw, 37px);
   width: auto;
   display: block;
   object-fit: contain;
@@ -768,6 +768,7 @@ div[data-page-no="6"] .tm-contact-info{
 @media (max-width: 480px){
   .page-wrap{ padding-top: 180px; }
 }
+
 
 
 
