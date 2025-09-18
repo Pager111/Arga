@@ -769,6 +769,36 @@ div[data-page-no="6"] .tm-contact-info{
   .page-wrap{ padding-top: 180px; }
 }
 
+/* Pusatkan & izinkan wrap (jadi 2 baris) */
+.logo-right-group{
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  display: flex;
+  flex-wrap: wrap;              /* <- penting supaya bisa 2 baris */
+  justify-content: center;
+  gap: 8px 12px;                /* jarak vertikal & horizontal */
+  padding: 6px 10px;
+  background: rgba(255,255,255,.65);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  max-width: 92vw;              /* biar nggak melebar keluar layar */
+}
+
+/* ukuran logo (sudah -20%) */
+.logo-right-group img{
+  height: clamp(14px, 4.8vw, 37px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* default padding atas form (nanti dioverride JS) */
+.page-wrap{ padding-top: 110px; }
+
 
 
 
