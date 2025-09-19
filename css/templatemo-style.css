@@ -913,6 +913,44 @@ div[data-page-no="6"] .tm-contact-info{
 /* Kalau sebelumnya ikon IG ada di .links, hilangkan yang lama biar tidak dobel */
 .tm-footer .links .social-btn{ display:none; }
 
+/* Tombol IG di form actions */
+.form-actions{
+  display:flex;
+  align-items:center;
+  justify-content: flex-start;   /* default: tombol2 di kiri */
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+.form-actions .ig-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight:700; text-decoration:none;
+  background: rgba(255,255,255,.92);
+  color:#111 !important;
+  border: 1px solid rgba(0,0,0,.12);
+  padding: 10px 14px;
+  border-radius: 999px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.form-actions .ig-btn:hover{
+  background: radial-gradient(circle at 30% 30%, #ffd776, #f8465b 45%, #7c36f3);
+  color:#fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+.form-actions .ig-btn .label{
+  display:none;
+}
+@media (min-width:768px){
+  .form-actions .ig-btn .label{ display:inline; }
+}
+
+/* mobile: tombol menumpuk full width */
+@media (max-width: 576px){
+  .form-actions{ flex-direction:column; align-items:stretch; }
+  .tm-submit-btn, .tm-btn-secondary, .ig-btn{ width:100%; text-align:center; }
+}
+
 
 
 
