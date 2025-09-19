@@ -860,6 +860,24 @@ div[data-page-no="6"] .tm-contact-info{
    tapi tambahkan fallback kalau JS terlambat */
 .page-wrap{ padding-top: max(110px, 12px + 40px + 20px); } /* fallback aman */
 
+/* Tombol sosial bundar di footer */
+.tm-footer .social-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:999px;
+  color:#fff; background: rgba(255,255,255,.12);
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+}
+.tm-footer .social-btn:hover{
+  background: rgba(255,255,255,.2);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+/* varian warna Instagram (opsional) */
+.tm-footer .social-btn.ig:hover{ background: radial-gradient(circle at 30% 30%, #ffd776, #f8465b 45%, #7c36f3); }
+
+/* kalau dimasukkan ke <nav class="links">, beri sedikit jarak */
+.tm-footer .links .social-btn{ padding:0; }
+
 
 
 
