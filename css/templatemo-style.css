@@ -951,6 +951,33 @@ div[data-page-no="6"] .tm-contact-info{
   .tm-submit-btn, .tm-btn-secondary, .ig-btn{ width:100%; text-align:center; }
 }
 
+/* === FIX: tombol Send ketutup footer/overlay === */
+
+/* 1) Footer jangan menutupi konten */
+.tm-footer{
+  position: relative !important;   /* dari absolute -> relative */
+  z-index: 1 !important;
+}
+
+/* 2) Page 6 kasih ruang ekstra di bawah agar tidak nabrak footer */
+div[data-page-no="6"] .js-tm-page-content{
+  padding-bottom: 140px !important;
+}
+
+/* 3) Pastikan form & tombol di atas layer lain */
+div[data-page-no="6"] .tm-contact-page,
+div[data-page-no="6"] .tm-contact-container,
+#contact-form,
+#contact-form button[type="submit"]{
+  position: relative !important;
+  z-index: 5 !important;
+  pointer-events: auto !important;
+}
+
+/* 4) (Opsional) Kalau preloader pernah tidak hilang, matikan saja */
+.loaded #loader-wrapper{ visibility:hidden !important; transform:translateY(-100%) !important; }
+#loader-wrapper{ display:none !important; } /* matikan total kalau perlu */
+
 
 
 
