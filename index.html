@@ -620,10 +620,21 @@ toggleDaftarButtonByPageNo(pageNo);
   })();
 </script>
 
+	<script>
+  // Fallback supaya preloader pasti hilang
+  window.addEventListener('load', function(){
+    document.body.classList.add('loaded');
+  });
+  // Cadangan terakhir: auto-hide setelah 2 detik
+  setTimeout(function(){
+    document.body.classList.add('loaded');
+  }, 2000);
+</script>
 		
 </body>
 
 </html>
+
 
 
 
