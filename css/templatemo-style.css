@@ -71,9 +71,9 @@ button:focus{outline:none;}
 /* Sesuaikan jumlah slide (1..5) */
 .cd-hero-slider li:nth-of-type(1){background-image:url("../img/BCG1.png");}
 .cd-hero-slider li:nth-of-type(2){background-image:url("../img/tm-bg-2.jpeg");}
-.cd-hero-slider li:nth-of-type(3){background-image:url("../img/tm-img-03.jpg");}
+.cd-hero-slider li:nth-of-type(3){background-image:url("../img/BG3.jpeg");}
 .cd-hero-slider li:nth-of-type(4){background-image:url("../img/BCG1.png");}
-.cd-hero-slider li:nth-of-type(5){background-image:url("../img/tm-bg-5.jpeg");}
+.cd-hero-slider li:nth-of-type(5){background-image:url("../img/BG3.jpeg");}
 
 .cd-hero-slider .cd-full-width{text-align:left;padding-top:0;}
 .cd-hero-slider h2,.cd-hero-slider p{max-width:none;width:100%;}
@@ -119,7 +119,7 @@ button:focus{outline:none;}
 
 /* ========= Contact ========= */
 .tm-contact-page{margin:0 auto;max-width:1190px;padding:0;}
-.tm-contact-container{max-width:1150px;}
+.tm-contact-container{max-width:1350px;}
 .form-group{margin-bottom:1.5rem;}
 .form-control,.tm-submit-btn{font-size:1.8rem;}
 .form-control{
@@ -952,10 +952,120 @@ div[data-page-no="6"] .tm-contact-info{
 }
 
 
+/*update 22 09 2025 */
+
+/* === ENLARGE: Drone slider lebih besar & fokus ke slide tengah === */
+.tm-drone-slider{
+  width:100%;
+  max-width: 1400px;   /* perbesar lebar maksimal */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tm-drone-slider .slick-slide{ 
+  padding: 12px;
+  transition: transform .3s ease, opacity .3s ease, box-shadow .3s ease;
+  opacity: .65;
+}
+.tm-drone-slider .slick-center{ 
+  transform: scale(1.05);
+  opacity: 1;
+}
+.tm-drone-slider img{
+  width:100%;
+  max-height: 78vh;      /* perbesar tinggi slider */
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+/* Arrow & dots sedikit diperbesar */
+.slick-prev:before, .slick-next:before{ font-size: 34px; }
+.slick-dots li button:before{ font-size: 12px; }
+
+/* Lightbox (klik gambar) – kasih rasa "zoomable" */
+.tm-drone-slider a.tm-zoom{ cursor: zoom-in; }
+
+/* Responsif tinggi maksimal */
+@media (max-width: 1024px){
+  .tm-drone-slider img{ max-height: 65vh; }
+}
+@media (max-width: 768px){
+  .tm-drone-slider img{ max-height: 58vh; }
+}
+@media (max-width: 576px){
+  .tm-drone-slider{ padding: 0 10px; }
+  .tm-drone-slider img{ max-height: 52vh; }
+}
+
+/* --- Hapus semua bentuk thumbnail di dots --- */
+.slick-dots img,
+.slick-dots picture,
+.slick-dots svg { display: none !important; }
+
+/* buang kemungkinan background thumbnail di button */
+.slick-dots li button { background-image: none !important; }
+
+/* matikan pseudo bawaan slick */
+.slick-dots li button:before { content: '' !important; }
+
+/* wadah & dot bulat polos */
+.slick-dots{ display:flex !important; gap:8px; bottom:-22px; }
+.slick-dots li{ width:auto; height:auto; }
+
+.slick-dots li button .dot{
+  display:block; width:12px; height:12px;
+  border-radius:50%;
+  background: rgba(255,255,255,.45);
+  transition: transform .15s ease, background .2s ease, opacity .2s ease;
+}
+.slick-dots li.slick-active button .dot{
+  background:#fff; transform: scale(1.15);
+}
+
+/* fokus keyboard */
+.slick-dots li button:focus { outline:2px solid #fff; outline-offset:2px; }
 
 
+/* --- Reset semua kemungkinan thumbnail di dots --- */
+.tm-drone-slider .slick-dots img,
+.tm-drone-slider .slick-dots picture,
+.tm-drone-slider .slick-dots svg{ display:none !important; }
+.tm-drone-slider .slick-dots li button:before{ content:'' !important; } /* matikan icon default */
 
+/* --- BAR hitam di belakang dots --- */
+.tm-drone-slider .slick-dots{
+  position: absolute !important;
+  bottom: -26px;                 /* geser posisi */
+  left: 50%; transform: translateX(-50%);
+  display: flex !important; gap: 8px;
+  width: auto; height: auto;     /* agar pas mengikuti isi */
+  padding: 6px 10px;
+  background: rgba(0,0,0,.65);   /* bar hitam transparan */
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  z-index: 3;
+}
 
+/* --- Tombol bulat putih di atas bar --- */
+.tm-drone-slider .slick-dots li{ width:auto; height:auto; margin:0; }
+.tm-drone-slider .slick-dots li button{
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.75);   /* putih pudar (inactive) */
+  border: 0; padding: 0;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease, opacity .2s ease;
+}
+.tm-drone-slider .slick-dots li.slick-active button{
+  background: #fff;               /* putih solid (active) */
+  transform: scale(1.15);
+}
+.tm-drone-slider .slick-dots li button:focus{
+  outline: 2px solid #fff; outline-offset: 2px; /* aksesibilitas */
+}
 
-
-
+/* Responsif kecil: dekatkan ke slider */
+@media (max-width: 576px){
+  .tm-drone-slider .slick-dots{ bottom: -20px; gap: 6px; padding: 5px 8px; }
+  .tm-drone-slider .slick-dots li button{ width:10px; height:10px; }
+}
