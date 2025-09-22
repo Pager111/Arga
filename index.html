@@ -508,21 +508,68 @@ toggleDaftarButtonByPageNo(pageNo);
 
 <script>
   $(document).ready(function(){
-    $('.tm-drone-slider').slick({
-      centerMode: true,
-      centerPadding: '160px',
-      slidesToShow: 3,
-      autoplay: true,
-      autoplaySpeed: 2500,
-      arrows: true,
-      responsive: [
-        { breakpoint: 1024, settings: { slidesToShow: 2, centerPadding: '40px' } },
-        { breakpoint: 768,  settings: { slidesToShow: 1, centerPadding: '24px' } },
-        { breakpoint: 576,  settings: { slidesToShow: 1, centerMode: false } }  // <— paling kecil: matikan centermode
-      ]
+
+    // Bungkus img -> <a> untuk lightbox (punyamu tetap)
+    $('.tm-drone-slider').each(function(){
+      $(this).find('img').each(function(){
+        var $img = $(this), src = $img.attr('src');
+        if (!$img.parent('a').length) {
+          $img.wrap('<a class="tm-zoom" href="'+src+'" title=""></a>');
+        }
+      });
     });
+
+    // Fungsi: bersihkan dots & buat bulatan
+    function makePlainDots($slider){
+      // hapus semua img/picture/svg yang mungkin disuntik customPaging lama
+      $slider.find('.slick-dots img, .slick-dots picture, .slick-dots svg').remove();
+      // kosongkan tombol & tambahkan span.dot
+      $slider.find('.slick-dots li button').each(function(){
+        $(this).empty().append('<span class="dot" aria-hidden="true"></span>');
+      });
+    }
+	  // buang sisa thumbnail lama & kosongkan isi button dots
+$('.tm-drone-slider').on('init reInit', function(){
+  var $s = $(this);
+  $s.find('.slick-dots img, .slick-dots picture, .slick-dots svg').remove();
+  $s.find('.slick-dots li button').empty();    // pastikan tombol polos
+});
+
+    // Inisialisasi slider + pembersihan dots saat init & reInit
+    $('.tm-drone-slider')
+      .on('init reInit', function(){ makePlainDots($(this)); })
+      .slick({
+        centerMode: true,
+        centerPadding: '140px',
+        slidesToShow: 1,
+        autoplay: true,
+        autoplaySpeed: 2600,
+        speed: 500,
+        arrows: true,
+        dots: true,
+        pauseOnHover: true,
+        responsive: [
+          { breakpoint: 1280, settings: { centerPadding: '120px' } },
+          { breakpoint: 1024, settings: { centerPadding: '80px'  } },
+          { breakpoint: 768,  settings: { centerPadding: '40px'  } },
+          { breakpoint: 576,  settings: { centerMode: false, slidesToShow: 1 } }
+        ]
+      });
+
+    // Magnific Popup (punyamu tetap)
+    $('.tm-drone-slider').magnificPopup({
+      delegate: 'a.tm-zoom',
+      type: 'image',
+      gallery: { enabled: true, tPrev: 'Previous', tNext: 'Next' },
+      mainClass: 'mfp-fade',
+      removalDelay: 180,
+      closeOnContentClick: false,
+      closeBtnInside: false
+    });
+
   });
 </script>
+
 
 <script>
   (function(){
@@ -624,7 +671,6 @@ toggleDaftarButtonByPageNo(pageNo);
 </body>
 
 </html>
-
 
 
 
