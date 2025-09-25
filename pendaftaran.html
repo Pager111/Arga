@@ -141,9 +141,9 @@
         <!-- Bidang diikuti -->
         <div class="form-group check-list">
           <label>Bidang Kompetisi yang Diikuti</label>
-          <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Dropping Cargo">Inovasi Desain Drone Dropping Cargo</label>
-          <label><input type="checkbox" name="bidang[]" value="Inovasi Desain Drone Tepat Sasaran">Inovasi Desain Drone Tepat Sasaran</label>
-          <label><input type="checkbox" name="bidang[]" value="Inovasi Drone Teknologi Terbaru">Inovasi Drone Teknologi Terbaru</label>
+          <label><input type="checkbox" name="bidang" value="Inovasi Desain Drone Dropping Cargo">Inovasi Desain Drone Dropping Cargo</label>
+          <label><input type="checkbox" name="bidang" value="Inovasi Desain Drone Tepat Sasaran">Inovasi Desain Drone Tepat Sasaran</label>
+          <label><input type="checkbox" name="bidang" value="Inovasi Drone Teknologi Terbaru">Inovasi Drone Teknologi Terbaru</label>
         </div>
 
         <!-- Instansi -->
@@ -177,7 +177,16 @@
     maxlength="800" required></textarea>
   <div class="hint" id="profil-hint">Tulis ringkas & relevan. Maks 800 karakter. <span id="profil-count">0/800</span></div>
 </div>
-
+		  
+		  <!-- Link video & proposal -->
+<div class="form-group">
+          <label for="link-vid">Link Pengumpulan Proposal & Video (GDrive)</label>
+	<div class="hint" id="profil-hint1">Peserta wajib membuat video singkat tentang rangkaian kegiatan inovasi drone masing-masing sesuai dengan kategori yang dipilih sebagai  bahan seleksi awal dewan juri KIDN 2025 untuk memilih peserta yang masuk ke semifinal</div>
+        </div>
+          <input type="text" id="link-vid" name="link-video" class="form-control" 
+				 placeholder="Contoh = https://drive.google.com/...." required />
+	
+		  
         <!-- Anti-bot & meta -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <input type="hidden" name="_subject" value="Pendaftaran Baru dari Website" />
@@ -394,7 +403,6 @@
 
 </body>
 </html>
-
 
 
 
