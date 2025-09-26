@@ -283,6 +283,7 @@ figure.effect-ruby:hover img{opacity:.2;transform:scale(1);}
 @media (min-width:768px){
   .cd-slider-nav .nav-item.selected .nav-link,
   .cd-slider-nav .nav-link:hover,
+
   .cd-slider-nav .nav-link:focus{background-color:rgba(255,255,255,.7);}
   .tm-3-col-textbox{width:50%;}
   .tm-flex{display:flex;}
@@ -863,7 +864,7 @@ div[data-page-no="6"] .tm-contact-info{
 /* Tombol sosial bundar di footer */
 .tm-footer .social-btn{
   display:inline-flex; align-items:center; justify-content:center;
-  width:36px; height:36px; border-radius:999px;
+  width:56px; height:36px; border-radius:999px;
   color:#fff; background: rgba(255,255,255,.12);
   transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
 }
@@ -1066,6 +1067,14 @@ div[data-page-no="6"] .tm-contact-info{
 
 /* Responsif kecil: dekatkan ke slider */
 @media (max-width: 576px){
-  .tm-drone-slider .slick-dots{ bottom: -20px; gap: 6px; padding: 5px 8px; }
-  .tm-drone-slider .slick-dots li button{ width:10px; height:10px; }
+  .tm-drone-slider .slick-dots{ bottom: -20px; gap: 6px; padding: 5px 8px; background-color:transparent}
+  .tm-drone-slider .slick-dots li button{ width:10px; height:10px; background-color:transparent }
 }
+
+/* Hide slick dots khusus untuk section Drones (page-no="2") */
+
+/* Hide slick dots khusus untuk Drones (page 2) & Tactical (page 3) */
+:is(div[data-page-no="2"], div[data-page-no="3"]) .tm-drone-slider .slick-dots{
+  display: none !important;
+}
+
