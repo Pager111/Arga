@@ -16,94 +16,10 @@
   <style>
     body{
       min-height:100vh;
-      /*background: url('img/BCG1.png') center/cover no-repeat fixed, #010101;*/
+      background: url('img/BCG1.png') center/cover no-repeat fixed, #010101;
       color:#000;
       font-family:'Open Sans', Helvetica, Arial, sans-serif;
     }
-	  /* ===== Hero-like core (radial grad) di belakang seluruh halaman ===== */
-html, body{ height:auto; overflow-y:auto; }  /* aktifkan scroll vertikal */
-body{
-  position: relative;
-  overflow-x:hidden;                         /* tetap cegah scroll horizontal */
-}
-
-body::before{
-  content:"";
-  position:absolute; inset:0; z-index:0;
-  background:
-    radial-gradient(120% 90% at 50% 45%,
-      #ff4a4f 0%,
-      #001d99 35%,
-      #1a0607 70%,
-      #010101 100%
-    );
-  pointer-events:none;
-}
-
-/* Lapisan efek bg (matrix, particles, garis miring, orbs) */
-.fx-layers{ position:fixed; inset:0; z-index:1; pointer-events:none; }
-
-/* Matrix Rain */
-#matrixRain{
-  position:absolute; inset:0;
-  font-family: "Montserrat", monospace;
-  color:#ff5257;
-  mix-blend-mode: screen;
-  opacity:.7;
-}
-.matrix-column{
-  position:absolute; top:-120vh;
-  width:22px; line-height:22px; white-space:pre; font-size:16px;
-  text-shadow: 0 0 8px rgba(228,30,38,.65);
-  animation: rain linear infinite;
-}
-@keyframes rain{ from{transform:translateY(0)} to{transform:translateY(220vh)} }
-
-/* Particles */
-#particlesContainer{ position:absolute; inset:0; }
-.particle{
-  position:absolute; top:-10px; left:50%;
-  width:6px; height:6px; border-radius:50%;
-  background:#ff5a60; box-shadow:0 0 14px rgba(255,90,96,.7);
-  animation: floatUp linear infinite;
-}
-@keyframes floatUp{
-  from{ transform: translateY(110vh) scale(.8); opacity:0 }
-  10%{ opacity:.9 } to{ transform: translateY(-10vh) scale(1.2); opacity:0 }
-}
-
-/* Data Streams (garis miring) */
-#dataStreams{ position:absolute; inset:0; }
-.data-stream{
-  position:absolute; left:-300px; width:320px; height:2px;
-  background:linear-gradient(90deg, transparent, rgba(255,80,86,.85), transparent);
-  opacity:.7; filter: blur(.2px);
-  animation: stream linear infinite;
-}
-@keyframes stream{ from{transform:translateX(0)} to{transform:translateX(140vw)} }
-
-/* Orbs parallax */
-.orb{ position:absolute; z-index:0; border-radius:50%; filter: blur(18px); opacity:.35; transition:transform .25s ease-out; }
-.orb-1{
-  width:320px; height:320px; top:10%; left:10%;
-  background: radial-gradient(circle, rgba(255,96,104,.55), rgba(228,30,38,.15) 60%, transparent 70%);
-}
-.orb-2{
-  width:260px; height:260px; bottom:8%; right:12%;
-  background: radial-gradient(circle, rgba(255,80,86,.55), rgba(228,30,38,.15) 60%, transparent 70%);
-}
-
-/* Pastikan konten di atas efek */
-.logo-fixed, .logo-right-group, .page-wrap{ position:relative; z-index:3; }
-
-/* Mobile: ringan */
-@media (max-width:576px){
-  #matrixRain{ opacity:.55; }
-  .particle{ width:5px; height:5px; }
-  .orb{ opacity:.28; filter: blur(14px); }
-}
-
-	  
     /* Logo pojok kiri atas */
     .logo-fixed{
       position:fixed; top:16px; left:16px; z-index:10;
@@ -134,6 +50,7 @@ body::before{
       font-size:28px; font-weight:900; margin:0 0 14px; color:#000;
     }
     .form-help{ margin-top:8px; font-size:14px; color:#333; }
+	  .form-help1{ margin-top:12px; color:#333; }
 
     /* Input & tombol */
     .form-group{ margin-bottom:14px; }
@@ -176,16 +93,6 @@ body::before{
   </style>
 </head>
 <body>
-<!-- BG FX layers (mirip hero infinite) -->
-<div class="fx-layers" aria-hidden="true">
-  <div id="matrixRain"></div>
-  <div id="particlesContainer"></div>
-  <div id="dataStreams"></div>
-
-  <!-- orbs untuk parallax halus -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-</div>
 
   <!-- Logo saja (tanpa navbar/menu) -->
   <a class="logo-fixed" href="index.html" aria-label="Kembali ke Home">
@@ -495,77 +402,8 @@ body::before{
 })();
 </script>
 
-	<script>
-(function(){
-  // Matrix Rain
-  function generateMatrixRain(){
-    const el = document.getElementById('matrixRain'); if(!el) return;
-    el.innerHTML = '';
-    const chars = '01 Δ Ξ Λ ∑ Ω ∏ π √ ∞ ∇ Θ Φ Ψ Σ ⊕ ⊗ ⊖ ⊘ ⊚ ⊛ ≠ ≤ ≥ ∵ ∴ ∫ ≈ ≡ ∂ ∆ ∞';
-    const colW = 22, cols = Math.ceil(window.innerWidth/colW);
-    for(let i=0;i<cols;i++){
-      const c = document.createElement('div'); c.className='matrix-column';
-      c.style.left = (i*colW)+'px';
-      c.style.animationDuration = (10+Math.random()*8)+'s';
-      c.style.animationDelay    = (Math.random()*5)+'s';
-      let t=''; const n=16+Math.floor(Math.random()*16);
-      for(let j=0;j<n;j++) t += chars[Math.floor(Math.random()*chars.length)] + '\n';
-      c.textContent=t; el.appendChild(c);
-    }
-  }
-  // Particles
-  function generateParticles(){
-    const el = document.getElementById('particlesContainer'); if(!el) return;
-    el.innerHTML = '';
-    const count = (window.innerWidth>1200)?70:(window.innerWidth>768?50:36);
-    for(let i=0;i<count;i++){
-      const p=document.createElement('div'); p.className='particle';
-      p.style.left=(Math.random()*100)+'%';
-      p.style.animationDelay=(Math.random()*12)+'s';
-      p.style.animationDuration=(18+Math.random()*18)+'s';
-      el.appendChild(p);
-    }
-  }
-  // Streams
-  function generateStreams(){
-    const el = document.getElementById('dataStreams'); if(!el) return;
-    el.innerHTML = '';
-    for(let i=0;i<10;i++){
-      const s=document.createElement('div'); s.className='data-stream';
-      s.style.top=(Math.random()*100)+'%';
-      s.style.animationDelay=(Math.random()*4)+'s';
-      s.style.transform=`rotate(${(Math.random()*24-12)}deg)`;
-      s.style.opacity=(0.35+Math.random()*0.5).toFixed(2);
-      s.style.height=(1+Math.floor(Math.random()*2))+'px';
-      el.appendChild(s);
-    }
-  }
-  // Orbs parallax ringan
-  let raf=null;
-  function onMouse(e){
-    if(raf) return;
-    raf=requestAnimationFrame(()=>{
-      const orbs=document.querySelectorAll('.orb');
-      const cx=window.innerWidth/2, cy=window.innerHeight/2;
-      const dx=e.clientX-cx, dy=e.clientY-cy;
-      orbs.forEach((o,i)=>{ const s=(i+1)*0.02; o.style.transform=`translate(${dx*s}px,${dy*s}px)`; });
-      raf=null;
-    });
-  }
-
-  function init(){
-    generateMatrixRain(); generateParticles(); generateStreams();
-    window.addEventListener('mousemove', onMouse, {passive:true});
-  }
-  // init + regenerate on resize
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
-  let to; window.addEventListener('resize', ()=>{ clearTimeout(to); to=setTimeout(()=>{ generateMatrixRain(); generateParticles(); generateStreams(); }, 250); });
-})();
-</script>
-
 </body>
 </html>
-
 
 
 
